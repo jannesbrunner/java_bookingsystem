@@ -1,7 +1,7 @@
 /**
  * 
  */
-package en.htwberlin.imi.cinemabsystem;
+package de.htwberlin.imi.cinemabsystem;
 
 /**
  * @author Jannes Brunner, Mario Schuetz, Katharina Wunder
@@ -14,6 +14,7 @@ public class Bookingsystem {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		System.out.println("Hello World");
 
 	}
 
