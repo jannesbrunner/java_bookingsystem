@@ -1,13 +1,15 @@
 package de.htwberlin.imi.cinemabsystem;
 
+import java.util.Date;
+
 public class Movie {
 	
 	private String title;
 	private double price;
-	private String date;
-	private String time;
+	private Date date;
+	private Date time;
 		
-	public Movie(String title, double price, String date, String time){
+	public Movie(String title, double price){
 		this.title = title;
 		this.price = price;
 		this.date = date;
@@ -22,11 +24,11 @@ public class Movie {
 		return price;
 	}
 	
-	public String getDate(){
+	public Date getDate(){
 		return date;
 	}
 	
-	public String getTime(){
+	public Date getTime(){
 		return time;
 	}
 }

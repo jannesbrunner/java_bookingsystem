@@ -18,12 +18,22 @@ public class Seat {
 		return booked;
 	}
 	
-	public void setBooked(){
+	public void setBook(){
+		if(!booked){
+			booked = true;
+			System.out.println("Seat booked.");
+		}
+		else
+			System.out.println("Seat is already booked");
+	}
+	
+	public void setUnbook(){
 		if(booked){
 			booked = false;
+			System.out.println("Reservation deleted");
 		}
-		else{
-			booked = true;
-		}		
+		else
+			System.out.println("Seat is not booked.");
 	}
+	
 }
