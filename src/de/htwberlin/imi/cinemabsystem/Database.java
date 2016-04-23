@@ -18,6 +18,7 @@ public class Database {
 	
 	public Database(){
 		
+		createMovies();
 		createCustomers();
 		testCustomer();
 		
@@ -25,6 +26,7 @@ public class Database {
 
 	public void createCustomers(){		
 		customers = new ArrayList<Customer>();
+		
 	}
 	
 	public void newCustomer(String lname, String fname, String pin){
@@ -48,4 +50,13 @@ public class Database {
 		movies.add(new Movie("Tenacious D in The Pick of Destiny", 90, 10.5));
 	}
 	
+	public void allMovies(){
+		int cnt = 1;
+		for(Movie amovie : movies){
+			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
+			cnt++;
+		}
+		System.out.println("To see more details about the movie of your choice \ntype the number of in front of it.\n");
+
+	}
 }

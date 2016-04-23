@@ -9,12 +9,8 @@ public class Shows {
 	ArrayList<Theater> theaters;
 	
 	public Shows(){
-		createTheaters();
-		availableMovies();
-		
-	}
-	
-	
+		createTheaters();		
+	}	
 	
 	public void createTheaters(){
 		
@@ -25,14 +21,5 @@ public class Shows {
 		theaters.add(new Theater(10, 55));
 		theaters.add(new Theater(30, 150));
 	}
-	
-	public void availableMovies(){
-		int cnt = 1;
-		for(Movie amovie : movies){
-			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
-			System.out.println("To see more details about the movie of your choice \ntype the number of in front of it.");
-			cnt++;
-		}
 
-	}
 }
