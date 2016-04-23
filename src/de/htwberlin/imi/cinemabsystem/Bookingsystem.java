@@ -22,6 +22,7 @@ public class Bookingsystem {
 	Bash bsh; // the bash (for user input)
 	ArrayList<HelpItem> helpstorage; // Holds help information
 	Database database;
+	String actualUser = "";
 
 	public static void main(String[] args) {
 
@@ -55,6 +56,7 @@ public class Bookingsystem {
 				for (HelpItem x : helpstorage) {
 					System.out.println(x.getName() + " : " + x.getDescription());
 				}
+				System.out.println("\n");
 				break;
 
 			case "quit":
@@ -73,7 +75,9 @@ public class Bookingsystem {
 				
 			case "register":
 				// register new customer
+				if(actualUser != null){
 				register();
+				}
 				break;
 
 			default: // if the command is unknown
@@ -134,35 +138,44 @@ public class Bookingsystem {
 	}
 	
 	private void register(){
-
-		Scanner input = new Scanner(System.in);
-		String lname;
-		String fname;
-		String pin;
+		if(actualUser.equals("")){
+			Scanner input = new Scanner(System.in);
+			String lname;
+			String fname;
+			String pin;
 		
-		System.out.print("Lastname: ");
-		lname = input.nextLine();
-		System.out.print("Firstname: ");
-		fname = input.nextLine();
-		System.out.print("PIN: ");
-		pin = input.nextLine();
-		database.newCustomer(lname, fname, pin);
+			System.out.print("Lastname: ");
+			lname = input.nextLine();
+			System.out.print("Firstname: ");
+			fname = input.nextLine();
+			System.out.print("PIN: ");
+			pin = input.nextLine();
+			database.newCustomer(lname, fname, pin);
 		
-		System.out.println("You got registered as " + fname + " " + lname);
-		System.out.println("Enjoy our service.\n");
+			System.out.println("You got registered as " + fname + " " + lname);
+			System.out.println("Enjoy our service.\n");
+		}
+		else{
+			System.out.println("You are already logged in.\n");
+		}
 	}
 	
 	private void login(){
 
-		Scanner input = new Scanner(System.in);
-		String lname;
-		String pin;
+		if(actualUser.equals("")){
+			Scanner input = new Scanner(System.in);
+			String lname;
+			String pin;
 		
-		System.out.print("Lastname: ");
-		lname = input.nextLine();
-		System.out.print("PIN: ");
-		pin = input.nextLine();
-		database.userLogin(lname, pin);
+			System.out.print("Lastname: ");
+			lname = input.nextLine();
+			System.out.print("PIN: ");
+			pin = input.nextLine();
+			database.userLogin(lname, pin);
+			actualUser = lname;
+		}
+		else{
+			System.out.println("You are already logged in.\n");
+		}
 	}
-
 }

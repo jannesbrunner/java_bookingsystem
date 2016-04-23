@@ -16,7 +16,6 @@ public class Database {
 	Customer customer;
 	ArrayList<Customer> customers;
 	ArrayList<Movie> movies;
-	String actualUser;
 	
 	public Database(){
 		
@@ -52,7 +51,6 @@ public class Database {
 				String userpin =  tempCustomer.getPin();
 				if(tempUn.equals(username) && userpin.equals(pin)){
 					System.out.println("Welcome back " + tempCustomer.getFName() + " " + tempUn);
-					actualUser = tempUn;
 					found = true;
 				}
 			}
