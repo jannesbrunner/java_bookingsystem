@@ -3,6 +3,7 @@
  */
 package de.htwberlin.imi.cinemabsystem;
 
+import java.util.Scanner;
 import java.util.ArrayList; // for the help storage
 
 /**
@@ -54,7 +55,6 @@ public class Bookingsystem {
 				for (HelpItem x : helpstorage) {
 					System.out.println(x.getName() + " : " + x.getDescription());
 				}
-
 				break;
 
 			case "quit":
@@ -64,6 +64,31 @@ public class Bookingsystem {
 			case "program":
 				// prints all available movies
 				database.allMovies();
+				break;
+				
+//			case "login":
+//				// user login
+//				database.userLogin(lname, fname, pin);				
+//				break;
+//				
+			case "register":
+				// register new customer
+				Scanner input = new Scanner(System.in);
+				String lname;
+				String fname;
+				String pin;
+				
+				System.out.print("Lastname: ");
+				lname = input.nextLine();
+				System.out.print("Firstname: ");
+				fname = input.nextLine();
+				System.out.print("PIN: ");
+				pin = input.nextLine();
+				database.newCustomer(lname, fname, pin);
+				//input.close();
+				
+				System.out.println("You got registered as " + fname + " " + lname);
+				System.out.println("Enjoy our service.\n");
 				break;
 
 			default: // if the command is unknown
@@ -91,6 +116,8 @@ public class Bookingsystem {
 		helpstorage.add(new HelpItem("quit", "To exit the program"));
 		helpstorage.add(new HelpItem("test", "Just to test the Help system"));
 		helpstorage.add(new HelpItem("program", "Prints out all available movies."));
+		helpstorage.add(new HelpItem("login", "Login in to your account. Username and PIN needed."));
+		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
 	}
 
 	private class HelpItem {

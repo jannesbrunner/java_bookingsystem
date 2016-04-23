@@ -34,6 +34,7 @@ public class Database {
 		customers.add(new Customer(lname, fname, pin));
 	}
 	
+	// default customers to load the customers arraylist
 	public void testCustomer(){
 		customers.add(new Customer("Bee", "Jay", "1234"));
 		customers.add(new Customer("Gould", "Eli", "0815"));
@@ -48,6 +49,12 @@ public class Database {
 		movies.add(new Movie("The Usual Suspect", 106, 10.5));
 		movies.add(new Movie("Star Wars 4 - 6", 378, 33.33));
 		movies.add(new Movie("Tenacious D in The Pick of Destiny", 90, 10.5));
+	}
+	
+	public void userLogin(String username, String pin){
+		
+		// login existing user
+		
 	}
 	
 	public void allMovies(){
