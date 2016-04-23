@@ -19,14 +19,10 @@ public class Shows {
 		
 		// create new movies with title and price
 		ArrayList<Movie> movies = new ArrayList<Movie>();
-		movies.add(new Movie("Pulp Fiction", 10));
-		movies.add(new Movie("The Usual Suspect", 10));
-		movies.add(new Movie("Star Wars", 14));
-		movies.add(new Movie("The Pick of Destiny", 10));
-		
-		//initialise movie showtimes date (dd/mm/yyyy) and time (hh:mm)
-		Movie actualMovie = movies.get(0);
-		actualMovie.setShowTimes("24/04/2016", "18:00");
+		movies.add(new Movie("Pulp Fiction", 154, 10.5));
+		movies.add(new Movie("The Usual Suspect", 106, 10.5));
+		movies.add(new Movie("Star Wars 4 - 6", 378, 33.33));
+		movies.add(new Movie("Tenacious D in The Pick of Destiny", 90, 10.5));
 		
 		System.out.println(movies + "\n");
 			
