@@ -66,29 +66,14 @@ public class Bookingsystem {
 				database.allMovies();
 				break;
 				
-//			case "login":
-//				// user login
-//				database.userLogin(lname, fname, pin);				
-//				break;
-//				
+			case "login":
+				// user login
+				login();
+				break;
+				
 			case "register":
 				// register new customer
-				Scanner input = new Scanner(System.in);
-				String lname;
-				String fname;
-				String pin;
-				
-				System.out.print("Lastname: ");
-				lname = input.nextLine();
-				System.out.print("Firstname: ");
-				fname = input.nextLine();
-				System.out.print("PIN: ");
-				pin = input.nextLine();
-				database.newCustomer(lname, fname, pin);
-				//input.close();
-				
-				System.out.println("You got registered as " + fname + " " + lname);
-				System.out.println("Enjoy our service.\n");
+				register();
 				break;
 
 			default: // if the command is unknown
@@ -104,7 +89,7 @@ public class Bookingsystem {
 	/**
 	 * will print the welcome screen
 	 */
-	public void printWelcome(){
+	private void printWelcome(){
 		System.out.println("#############################");
 		System.out.println("### Welcome to JEM-Cinema ###");
 		System.out.println("#############################\n");
@@ -146,6 +131,38 @@ public class Bookingsystem {
 			return description;
 		}
 
+	}
+	
+	private void register(){
+
+		Scanner input = new Scanner(System.in);
+		String lname;
+		String fname;
+		String pin;
+		
+		System.out.print("Lastname: ");
+		lname = input.nextLine();
+		System.out.print("Firstname: ");
+		fname = input.nextLine();
+		System.out.print("PIN: ");
+		pin = input.nextLine();
+		database.newCustomer(lname, fname, pin);
+		
+		System.out.println("You got registered as " + fname + " " + lname);
+		System.out.println("Enjoy our service.\n");
+	}
+	
+	private void login(){
+
+		Scanner input = new Scanner(System.in);
+		String lname;
+		String pin;
+		
+		System.out.print("Lastname: ");
+		lname = input.nextLine();
+		System.out.print("PIN: ");
+		pin = input.nextLine();
+		database.userLogin(lname, pin);
 	}
 
 }

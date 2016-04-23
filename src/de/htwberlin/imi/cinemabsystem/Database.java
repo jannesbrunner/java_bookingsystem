@@ -9,12 +9,14 @@ package de.htwberlin.imi.cinemabsystem;
  */
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Database {
 	
 	Customer customer;
 	ArrayList<Customer> customers;
 	ArrayList<Movie> movies;
+	String actualUser;
 	
 	public Database(){
 		
@@ -25,12 +27,10 @@ public class Database {
 	}
 
 	public void createCustomers(){		
-		customers = new ArrayList<Customer>();
-		
+		customers = new ArrayList<Customer>();		
 	}
 	
-	public void newCustomer(String lname, String fname, String pin){
-		
+	public void newCustomer(String lname, String fname, String pin){		
 		customers.add(new Customer(lname, fname, pin));
 	}
 	
@@ -38,12 +38,32 @@ public class Database {
 	public void testCustomer(){
 		customers.add(new Customer("Bee", "Jay", "1234"));
 		customers.add(new Customer("Gould", "Eli", "0815"));
-		customers.add(new Customer("Schuetz", "Mario", "1337"));		
+		customers.add(new Customer("Super", "Mario", "1337"));		
 	}
 	
+	// user login
+	public void userLogin(String username, String pin){
+		boolean found = false;
+		Iterator<Customer> it = customers.iterator();
+			
+			while(!found && it.hasNext()){
+				Customer tempCustomer = it.next();
+				String tempUn = tempCustomer.getLName();
+				String userpin =  tempCustomer.getPin();
+				if(tempUn.equals(username) && userpin.equals(pin)){
+					System.out.println("Welcome back " + tempCustomer.getFName() + " " + tempUn);
+					actualUser = tempUn;
+					found = true;
+				}
+			}
+			if(!found){
+				System.out.println("Not a registered username or wrong password.");
+			}
+	}
+	
+	// create new movies with title, length in min and price in EUR
 	public void createMovies(){
 		
-		// create new movies with title, length in min and price in EUR
 		movies = new ArrayList<Movie>();
 		movies.add(new Movie("Pulp Fiction", 154, 10.5));
 		movies.add(new Movie("The Usual Suspect", 106, 10.5));
@@ -51,11 +71,6 @@ public class Database {
 		movies.add(new Movie("Tenacious D in The Pick of Destiny", 90, 10.5));
 	}
 	
-	public void userLogin(String username, String pin){
-		
-		// login existing user
-		
-	}
 	
 	public void allMovies(){
 		int cnt = 1;
@@ -63,7 +78,7 @@ public class Database {
 			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
 			cnt++;
 		}
-		System.out.println("To see more details about the movie of your choice \ntype the number of in front of it.\n");
+		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
 
 	}
 }
