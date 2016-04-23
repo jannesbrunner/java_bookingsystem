@@ -6,7 +6,7 @@ public class Seat {
 	boolean booked;
 	private String row;
 	
-	public Seat(String row, int seatNum, boolean booked){
+	public Seat(char row, int seatNum, boolean booked){
 		this.seatNum = seatNum;
 		this.booked = booked;
 		this.row = row;

@@ -39,6 +39,13 @@ public class Shows {
 		room[rows-1] = new Seat [overflowSeats];
 		}
 		
+		char r = 'A';
+		for (int y = 0; y >= room.length-1; y++ , r++){
+			for (int x = 0; x >= room[y].length-1; x++){
+				room[y][x] = new Seat (r, x, false);
+			}
+		}
+		
 		for (Seat[] arr : room) {
             System.out.println(Arrays.toString(arr));
         }
