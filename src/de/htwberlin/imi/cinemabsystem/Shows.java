@@ -1,7 +1,6 @@
 package de.htwberlin.imi.cinemabsystem;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Shows {
 	
@@ -12,11 +11,9 @@ public class Shows {
 //	ArrayList<Seat> seats;
 	
 	public Shows(){
-		
 		createMovies();
 		createTheaters();
-//		createSeats();
-		
+//		createSeats();		
 		availableMovies();
 		
 	}
@@ -52,18 +49,12 @@ public class Shows {
 //			}
 //	}
 	
-	public String availableMovies(){
-		String availableMovies = "";
-		
-		Iterator it = movies.iterator();
-		int i =1;
-		
-		while(it.hasNext()){
-			availableMovies += i + " " + it.next() + "\n \n";
-			i++;
+	public void availableMovies(){
+		int cnt = 1;
+		for(Movie amovie : movies){
+			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
+			cnt++;
 		}
-		
-		System.out.println("To see more details about the movie of your choice \ntype the number of in front of it.");
-		return availableMovies;
+//		System.out.println("To see more details about the movie of your choice \ntype the number of in front of it.");
 	}
 }

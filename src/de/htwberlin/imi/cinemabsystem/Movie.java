@@ -4,11 +4,11 @@ public class Movie {
 	
 	private String title;
 	private double price;
-	private int length;
+	private int duration;
 	
-	public Movie(String title, int length, double price){
+	public Movie(String title, int duration, double price){
 		this.title = title;
-		this.length = length;
+		this.duration = duration;
 		this.price = price;
 	}
 	
@@ -20,7 +20,7 @@ public class Movie {
 		return price;
 	}
 	
-	public int getLength(){
-		return length;
+	public int getDuration(){
+		return duration;
 	}
 }

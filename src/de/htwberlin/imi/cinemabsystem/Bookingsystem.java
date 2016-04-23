@@ -35,6 +35,7 @@ public class Bookingsystem {
 		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
 														// for help information
 		setHelpitems(); // add new commands with description in this method
+		shows = new Shows();
 		shows.createMovies();
 	}
 
@@ -60,6 +61,7 @@ public class Bookingsystem {
 				break;
 				
 			case "program":
+				// prints all available movies
 				shows.availableMovies();
 				break;
 
