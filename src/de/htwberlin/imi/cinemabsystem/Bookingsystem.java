@@ -75,9 +75,7 @@ public class Bookingsystem {
 				
 			case "register":
 				// register new customer
-				if(actualUser != null){
 				register();
-				}
 				break;
 
 			default: // if the command is unknown
@@ -137,42 +135,58 @@ public class Bookingsystem {
 
 	}
 	
+	/**
+	 * register new customers. no username duplicates
+	 * @param username	loginname
+	 * @param lname		lastname
+	 * @param fname		firstname
+	 * @param pin		password 
+	 */	
 	private void register(){
 		if(actualUser.equals("")){
 			Scanner input = new Scanner(System.in);
+			String username;
 			String lname;
 			String fname;
 			String pin;
-		
+			
+			System.out.print("Username: ");
+			username = input.nextLine();		
 			System.out.print("Lastname: ");
 			lname = input.nextLine();
 			System.out.print("Firstname: ");
 			fname = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.newCustomer(lname, fname, pin);
-		
-			System.out.println("You got registered as " + fname + " " + lname);
-			System.out.println("Enjoy our service.\n");
+			database.newCustomer(username, lname, fname, pin);
 		}
 		else{
-			System.out.println("You are already logged in.\n");
+			System.out.println("You are already registered and logged in.\n");
 		}
 	}
 	
+	/**
+	 * login for registered users
+	 * @param username
+	 * @param pin
+	 * @param found checks for already existing username
+	 */
 	private void login(){
+		boolean found = false;
 
 		if(actualUser.equals("")){
 			Scanner input = new Scanner(System.in);
-			String lname;
+			String username;
 			String pin;
 		
-			System.out.print("Lastname: ");
-			lname = input.nextLine();
+			System.out.print("Username: ");
+			username = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.userLogin(lname, pin);
-			actualUser = lname;
+			database.userLogin(username, pin);
+			if(found){
+				actualUser = username;
+			}
 		}
 		else{
 			System.out.println("You are already logged in.\n");
