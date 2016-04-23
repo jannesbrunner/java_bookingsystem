@@ -37,6 +37,7 @@ public class Bookingsystem {
 		setHelpitems(); // add new commands with description in this method
 		database = new Database();
 		database.createMovies();
+		printWelcome();
 	}
 
 	public void run() {
@@ -74,11 +75,22 @@ public class Bookingsystem {
 
 		System.out.println("Good bye");
 	}
+	
+	/**
+	 * will print the welcome screen
+	 */
+	public void printWelcome(){
+		System.out.println("#############################");
+		System.out.println("### Welcome to JEM-Cinema ###");
+		System.out.println("#############################\n");
+		System.out.println("What would you like to do? \nType 'help' to see available commands.\n");
+		
+	}
 
 	private void setHelpitems() {
 		helpstorage.add(new HelpItem("quit", "To exit the program"));
 		helpstorage.add(new HelpItem("test", "Just to test the Help system"));
-
+		helpstorage.add(new HelpItem("program", "Prints out all available movies."));
 	}
 
 	private class HelpItem {
