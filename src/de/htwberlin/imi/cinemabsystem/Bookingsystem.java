@@ -20,6 +20,7 @@ public class Bookingsystem {
 
 	Bash bsh; // the bash (for user input)
 	ArrayList<HelpItem> helpstorage; // Holds help information
+	Shows shows;
 
 	public static void main(String[] args) {
 
@@ -34,6 +35,7 @@ public class Bookingsystem {
 		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
 														// for help information
 		setHelpitems(); // add new commands with description in this method
+		shows.createMovies();
 	}
 
 	public void run() {
@@ -55,6 +57,10 @@ public class Bookingsystem {
 
 			case "quit":
 				// nothing to do here yet.
+				break;
+				
+			case "program":
+				shows.availableMovies();
 				break;
 
 			default: // if the command is unknown
