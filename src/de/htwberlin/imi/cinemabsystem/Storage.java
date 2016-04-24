@@ -10,6 +10,7 @@ package de.htwberlin.imi.cinemabsystem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Scanner;
 
 public class Storage {
 	
@@ -124,19 +125,57 @@ public class Storage {
 		shows.add(new Show(movies.get(3), theaters.get(3), 16 ));			
 	}
 	
+	// get Show of Choice
 	public void getSoC(int choice){
 		
-		String userchoice = shows.get(choice).getMovie().getTitle();
-		String times = "Your movie starts at \n";
+		if(choice < shows.size()){		
+			String userchoice = shows.get(choice).getMovie().getTitle();
+			String times = "The selected movie screens at \n";
+			int cnt = 0;
 	
-		for(Show show : shows){
+			for(Show show : shows){
 			
-			String show2compare = show.getMovie().getTitle();
+				String show2compare = show.getMovie().getTitle();
 			
-			if(userchoice.equals(show2compare)){
-				times += show.getTime() + "\n";
+				if(userchoice.equals(show2compare)){
+					cnt++;
+					times += "Option #" + cnt + ": " + show.getTime() + "0\n";
+				}
+			}
+			if(cnt != 0){
+				System.out.println(times);
 			}
 		}
-		System.out.println(times);		
+		else{
+			System.out.println("Not a valid choice.");			
+		}
+	}
+	
+	// get Time of Choice
+	public void bookSeats(int choice){
+				
+		if(choice < shows.size()){
+			
+			Show chosenOne = shows.get(choice);
+			
+			Scanner input = new Scanner(System.in);
+			System.out.println("How many seats would you like to book? ");
+			int seats = input.nextInt();
+			inLine(seats);			
+		}
+		else{
+			System.out.println("Not a valid choice.");
+		}
+	}
+	
+	public int inLine(int seatQuantity){
+		int inLine = 1;
+		
+		if(seatQuantity > 1){
+			Scanner input = new Scanner(System.in);
+			System.out.println("Would you like to choose " + seatQuantity + " in a row (1) or separated (2)? ");
+			inLine = input.nextInt();
+		}
+		return inLine;
 	}
 }

@@ -189,8 +189,7 @@ public class Bookingsystem implements Serializable {
 		System.out.println("Your Choice: ");
 		int movieNum = input.nextInt();
 		storage.getSoC(movieNum);
-		
-		
-		
+		int choice = input.nextInt();
+		storage.bookSeats(choice);
 	}
 }
