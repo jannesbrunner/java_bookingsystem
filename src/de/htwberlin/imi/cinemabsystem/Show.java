@@ -36,7 +36,7 @@ public class Show {
 		this.theater = theater;
 		this.time = time;
 		
-		seatsPerRow = 20;
+		seatsPerRow = 10;
 		overflowSeats = theater.getSeats()%seatsPerRow;
 		noOverflowSeats = (theater.getSeats() - overflowSeats)/seatsPerRow;
 		rows = noOverflowSeats+1;

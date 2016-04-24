@@ -157,26 +157,49 @@ public class Storage {
 		if(choice < shows.size()){
 			
 			Show chosenOne = shows.get(choice);
-			
+			System.out.println("These are the available seats for " + chosenOne.getMovie().getTitle() + "\n");
+			chosenOne.showSeating();
 			Scanner input = new Scanner(System.in);
+			System.out.println();
 			System.out.println("How many seats would you like to book? ");
 			int seats = input.nextInt();
-			if(seats > 1){
+
+			if(seats == 1){
+				
+				Scanner inputSeat = new Scanner(System.in);
+				System.out.println("Which seat would you like to book?\nPlease state a seat and row number like shown above.");
+				String seatToBook = inputSeat.next();
+				
+				chosenOne.bookSeat(seatToBook.charAt(seatToBook.length() - 1), Integer.valueOf(seatToBook.substring(0,seatToBook.length() - 1)));
+				System.out.println("You booked seat " + seatToBook.charAt(seatToBook.length() - 1) + Integer.valueOf(seatToBook.substring(0,seatToBook.length() - 1)) + ".");
+				
+				
+				
+			}
+			else if(seats >= 2){
+				
 				inLine(seats);
 			}
+		
 		}
 		else{
 			System.out.println("Not a valid choice.");
 		}
+			
 	}
 	
 	public int inLine(int seatQuantity){
-		int inLine = 1;
+		int inLine;
 		
 		Scanner input = new Scanner(System.in);
-		System.out.println("Would you like to choose " + seatQuantity + " in a row (1) or separated (2)? ");
+		System.out.println("Would you like to choose " + seatQuantity + " seats in a row (1) or separated (2)? ");
 		inLine = input.nextInt();
 	
 		return inLine;
+	}
+	
+	public void bookSeat(){
+		
+		
 	}
 }
