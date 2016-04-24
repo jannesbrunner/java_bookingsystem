@@ -9,14 +9,20 @@ package de.htwberlin.imi.cinemabsystem;
  */
 public class Theater {
 	
-	int seats;
+	private int seats;
+	private int theaterNum;
 	
-	public Theater(int seats){
+	public Theater(int theaterNum, int seats){
 		this.seats = seats;
+		this.theaterNum = theaterNum;
 	}
 	
 	public int getSeats(){
 		return seats;
+	}
+	
+	public int getTheaterNum(){
+		return theaterNum;
 	}
 }
 

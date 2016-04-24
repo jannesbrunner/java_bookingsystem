@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class Show {
 	
 	static Movie movie;
-	static Theater test = new Theater(100);
+	static Theater test = new Theater(1, 100);
 	static int seatsPerRow = 20;
 	static int seatNumber = test.getSeats();;
 	static int overflowSeats = seatNumber%seatsPerRow;
@@ -25,8 +25,6 @@ public class Show {
 		bookSeat('f', 6);
 		unbookSeat('f', 6);
 		showSeating();
-		
-
 	}
 	public Show(Movie movie, Theater theater, double date){
 		createSeating(theater);

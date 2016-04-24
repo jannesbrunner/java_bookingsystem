@@ -21,8 +21,8 @@ public class Bookingsystem {
 
 	Bash bsh; // the bash (for user input)
 	ArrayList<HelpItem> helpstorage; // Holds help information
-	Database database;
-	String actualUser = "";
+	Storage storage;
+	String loggedUser = "";
 
 	public static void main(String[] args) {
 
@@ -37,8 +37,8 @@ public class Bookingsystem {
 		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
 														// for help information
 		setHelpitems(); // add new commands with description in this method
-		database = new Database();
-		database.createMovies();
+		storage = new Storage();
+		storage.createMovies();
 		printWelcome();
 	}
 
@@ -65,7 +65,7 @@ public class Bookingsystem {
 
 			case "program":
 				// prints all available movies
-				database.allMovies();
+				storage.allMovies();
 				break;
 				
 			case "login":
@@ -143,7 +143,7 @@ public class Bookingsystem {
 	 * @param pin		password 
 	 */	
 	private void register(){
-		if(actualUser.equals("")){
+		if(loggedUser.equals("")){
 			Scanner input = new Scanner(System.in);
 			String username;
 			String lname;
@@ -158,7 +158,7 @@ public class Bookingsystem {
 			fname = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.newCustomer(username, lname, fname, pin);
+			storage.newCustomer(username, lname, fname, pin);
 		}
 		else{
 			System.out.println("You are already registered and logged in.\n");
@@ -174,7 +174,7 @@ public class Bookingsystem {
 	private void login(){
 		boolean found = false;
 
-		if(actualUser.equals("")){
+		if(loggedUser.equals("")){
 			Scanner input = new Scanner(System.in);
 			String username;
 			String pin;
@@ -183,9 +183,9 @@ public class Bookingsystem {
 			username = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.userLogin(username, pin);
+			storage.userLogin(username, pin);
 			if(found){
-				actualUser = username;
+				loggedUser = username;
 			}
 		}
 		else{
