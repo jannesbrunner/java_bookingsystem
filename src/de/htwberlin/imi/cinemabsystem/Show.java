@@ -7,6 +7,8 @@ public class Show {
 	
 	static Movie movie;
 	static Theater test = new Theater(50);
+	static Theater theater;
+	static double time;
 	static int seatsPerRow = 10;
 	static int seatNumber = test.getSeats();;
 	static int overflowSeats = seatNumber%seatsPerRow;
@@ -29,13 +31,26 @@ public class Show {
 
 	}
 	public Show(Movie movie, Theater theater, double time){
-		createSeating(theater);
 		
+		this.movie = movie;
+		this.theater = theater;
+		this.time = time;
+		
+		createSeating(theater);
 		
 	}
 	
+	public Movie getMovie(){
+		return movie;
+	}
 	
+	public Theater getTheater(){
+		return theater;
+	}
 	
+	public double getTime(){
+		return time;
+	}
 	public static void createSeating(Theater theater){
 		
 		for (int i = 0; i < rows; i++){
