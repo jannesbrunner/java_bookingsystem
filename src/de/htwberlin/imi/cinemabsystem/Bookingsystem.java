@@ -28,6 +28,7 @@ public class Bookingsystem implements Serializable {
 	
 	Storage storage;
 	String loggedUser = "";
+	Customer currentCustomer;
 
 	public static void main(String[] args) {
 
@@ -42,7 +43,6 @@ public class Bookingsystem implements Serializable {
 		this.bsh = new IO_system(); // Setting up the IO_system
 						
 		storage = new Storage();
-		// storage.createMovies(); Duplicate? Already done in storage constructor @jay
 		loadData(); // load Data from files into Storage
 		printWelcome();
 	}
@@ -150,19 +150,21 @@ public class Bookingsystem implements Serializable {
 		boolean found = false;
 
 		if(loggedUser.equals("")){
-			Scanner input = new Scanner(System.in);
-			String username;
-			String pin;
-		
-			System.out.print("Username: ");
-			username = input.nextLine();
-			System.out.print("PIN: ");
-			pin = input.nextLine();
-			storage.userLogin(username, pin);
-			if(found){
-				loggedUser = username;
-			}
-		}
+			   Scanner input = new Scanner(System.in);
+			   String username;
+			   String pin;
+			  
+			   System.out.print("Username: ");
+			   username = input.nextLine();
+			   System.out.print("PIN: ");
+			   pin = input.nextLine();
+			   if(storage.findCustomer(username, pin) != null){
+			    
+			    loggedUser = username;
+			    currentCustomer = storage.findCustomer(username, pin);
+			    
+			   }
+			  }
 		else{
 			System.out.println("You are already logged in.\n");
 		}
@@ -176,9 +178,8 @@ public class Bookingsystem implements Serializable {
 		System.out.println("Your Choice: ");
 		int movieNum = input.nextInt();
 		storage.getSoC(movieNum);
-		
-		
-		
+		int choice = input.nextInt();
+		storage.bookSeats(choice);
 	}
 	
 	/*
@@ -218,6 +219,7 @@ public class Bookingsystem implements Serializable {
 		saveShows();
 		saveTheaters();
 		saveHelp();
+		System.out.println("All date saved sucessfuly!");
 		
 	}
 	

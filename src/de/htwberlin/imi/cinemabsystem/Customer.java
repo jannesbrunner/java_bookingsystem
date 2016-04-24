@@ -2,6 +2,7 @@
  * 
  */
 package de.htwberlin.imi.cinemabsystem;
+import java.util.ArrayList;
 
 import java.io.Serializable;
 /**
@@ -18,12 +19,15 @@ public class Customer implements Serializable  {
 	private String lname;
 	private String fname;
 	private String pin;
+	
+	ArrayList<Booking> bookings;
 
 	public Customer(String username, String lname, String fname, String pin){
 		this.username = username;
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
+		bookings = new ArrayList<Booking>();
 	}
 	
 	public String getUserName(){
@@ -57,4 +61,11 @@ public class Customer implements Serializable  {
 		
 	}
 	
+	public void addBooking(Booking bookingToAdd){
+		bookings.add(bookingToAdd);
+	}
+	
+	public void rmvBooking(Booking bookingToRvm){
+		bookings.remove(bookingToRvm);
+	}
 }

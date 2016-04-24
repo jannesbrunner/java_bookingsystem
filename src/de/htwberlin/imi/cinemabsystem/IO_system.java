@@ -62,7 +62,7 @@ public class IO_system {
 
 			out.writeObject(save);
 
-			 System.out.println("Serialization succeeded"); // for testing
+			 // System.out.println("Serialization succeeded"); // for testing
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +80,7 @@ public class IO_system {
 
 			out.writeObject(save);
 
-			 System.out.println("Serialization succeeded"); // for testing
+			 // System.out.println("Serialization succeeded"); // for testing
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class IO_system {
 
 			out.writeObject(save);
 
-			 System.out.println("Serialization succeeded"); // for testing
+			 // System.out.println("Serialization succeeded"); // for testing
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class IO_system {
 
 			out.writeObject(save);
 
-			 System.out.println("Serialization succeeded"); // for testing
+			// System.out.println("Serialization succeeded"); // for testing
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,7 +134,7 @@ public class IO_system {
 
 			out.writeObject(save);
 
-			 System.out.println("Serialization succeeded"); // for testing
+			 // System.out.println("Serialization succeeded"); // for testing
 		
 		} catch (Exception e) {
 			e.printStackTrace();
