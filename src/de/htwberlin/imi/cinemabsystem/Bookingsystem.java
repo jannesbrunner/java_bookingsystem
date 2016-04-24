@@ -5,6 +5,7 @@ package de.htwberlin.imi.cinemabsystem;
 
 import java.util.Scanner;
 import java.util.ArrayList; // for the help storage
+import java.io.Serializable;
 
 /**
  * @author Jannes Brunner, Mario Schuetz, Katharina Wunder
@@ -12,8 +13,12 @@ import java.util.ArrayList; // for the help storage
  *         This is the main Class of the whole system. (Thus it includes the
  *         main method)
  */
-public class Bookingsystem {
+public class Bookingsystem implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @param args
 	 *            Not in use yet
@@ -37,6 +42,7 @@ public class Bookingsystem {
 		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
 														// for help information
 		setHelpitems(); // add new commands with description in this method
+		bsh.savehelp(helpstorage, "helpsystem.bin");
 		database = new Database();
 		database.createMovies();
 		printWelcome();
@@ -107,33 +113,7 @@ public class Bookingsystem {
 		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
 	}
 
-	private class HelpItem {
-		/**
-		 * This is private Class / ADT for holding items for the help system.
-		 */
-		String name; // The name of the command
-		String description; // The description of the command
-
-		private HelpItem(String name, String description) {
-			this.name = name;
-			this.description = description;
-		}
-
-		/**
-		 * @return the name
-		 */
-		public String getName() {
-			return name;
-		}
-
-		/**
-		 * @return the description
-		 */
-		public String getDescription() {
-			return description;
-		}
-
-	}
+	
 	
 	/**
 	 * register new customers. no username duplicates

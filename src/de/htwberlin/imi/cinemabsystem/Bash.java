@@ -4,6 +4,9 @@
 package de.htwberlin.imi.cinemabsystem;
 
 import java.io.*;
+import java.util.ArrayList;
+
+
 
 
 
@@ -48,8 +51,12 @@ public class Bash {
 	}
 	
 	// SAVE AND READ OBJECT FILES
-	// Note! All saveable classes have to implement Serializable!
-	public void savedata(Object save, String filename) {
+	// Note! All storable classes have to implement Serializable!
+	
+	/*
+	 * Save method for the help system
+	 */
+	public void savehelp(ArrayList<HelpItem> save, String filename) {
 
 		try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
 
@@ -64,6 +71,10 @@ public class Bash {
 		}
 	}
 	
+	/*
+	 * General Object from file loader.
+	 * Note: You have to cast your object later.
+	 */
 	private Object load(String file) {
 		// Remember: Your class must implement Serializable in order to get loaded successfully
 		
