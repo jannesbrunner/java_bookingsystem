@@ -6,9 +6,9 @@ public class Ticket {
 	private Movie movie;
 	private Seat seat;
 	private int ticketNum;
-	private String startTime;
+	private double startTime;
 	
-	public Ticket(int ticketNum, Movie movie, String startTime, Theater theater, Seat seat){
+	public Ticket(int ticketNum, Movie movie, double startTime, Theater theater, Seat seat){
 		this.ticketNum = ticketNum;
 		this.startTime = startTime;
 		this.movie = movie;
@@ -24,7 +24,7 @@ public class Ticket {
 		
 	}
 	
-	public String getStartTime(){
+	public double getStartTime(){
 		return startTime;
 	}
 	

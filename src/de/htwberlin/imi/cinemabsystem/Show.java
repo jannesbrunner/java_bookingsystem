@@ -6,13 +6,20 @@ import java.util.Arrays;
 public class Show {
 	
 	static Movie movie;
+<<<<<<< HEAD
 	static Theater test = new Theater(1, 100);
 	static int seatsPerRow = 20;
+=======
+	static Theater test = new Theater(50);
+	static Theater theater;
+	static double time;
+	static int seatsPerRow = 10;
+>>>>>>> 1f318738a52538639826bab375435d9425319864
 	static int seatNumber = test.getSeats();;
 	static int overflowSeats = seatNumber%seatsPerRow;
-	static int noOverflowSeats = (seatNumber - overflowSeats)/20;
+	static int noOverflowSeats = (seatNumber - overflowSeats)/seatsPerRow;
 	static int rows = noOverflowSeats+1;
-	static char r = 'a';
+	static char r = 'A';
 
 	
 	static Seat[][] room = new Seat[rows][];
@@ -21,23 +28,45 @@ public class Show {
 	public static void main(String[] args) {
 		createSeating(test);
 		showSeating();
+<<<<<<< HEAD
 		bookSeat('e', 6);
 		bookSeat('f', 6);
 		unbookSeat('f', 6);
 		showSeating();
+=======
+		bookSeat('E', 6);
+		bookSeat('F', 6);
+		unbookSeat('F', 6);
+		//showSeating();
+		
+
+>>>>>>> 1f318738a52538639826bab375435d9425319864
 	}
-	public Show(Movie movie, Theater theater, double date){
+	public Show(Movie movie, Theater theater, double time){
+		
+		this.movie = movie;
+		this.theater = theater;
+		this.time = time;
+		
 		createSeating(theater);
 		
-		
 	}
 	
+	public Movie getMovie(){
+		return movie;
+	}
 	
+	public Theater getTheater(){
+		return theater;
+	}
 	
+	public double getTime(){
+		return time;
+	}
 	public static void createSeating(Theater theater){
 		
 		for (int i = 0; i < rows; i++){
-		room[i] = new Seat [20];
+		room[i] = new Seat [seatsPerRow];
 		}
 		if (overflowSeats != 0) {
 		room[rows-1] = new Seat [overflowSeats];

@@ -100,7 +100,6 @@ public class Storage {
 			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
 			cnt++;
 		}
-		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
 	}
 	
 	public void createTheaters(){
@@ -123,5 +122,16 @@ public class Storage {
 		shows.add(new Show(movies.get(2), theaters.get(2), 14 ));
 		shows.add(new Show(movies.get(3), theaters.get(3), 12 ));
 		shows.add(new Show(movies.get(3), theaters.get(3), 16 ));			
+	}
+	
+	public void getSoC(int choice){
+		
+		for(Show show : shows){
+			
+			show2compare = 
+			
+			if()
+		}
+		
 	}
 }

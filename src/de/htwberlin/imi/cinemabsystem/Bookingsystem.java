@@ -192,4 +192,17 @@ public class Bookingsystem {
 			System.out.println("You are already logged in.\n");
 		}
 	}
+	
+	private void book(){
+		storage.allMovies();
+		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Your Choice: ");
+		int movieNum = input.nextInt();
+		storage.getSoC(movieNum);
+		
+		
+		
+	}
 }
