@@ -81,7 +81,7 @@ public class Storage {
 			if(!found){
 				System.out.println("Not a registered username or wrong password.");
 			}
-			return found;
+		return found;
 	}
 	
 	// create new movies with title, length in min and price in EUR
