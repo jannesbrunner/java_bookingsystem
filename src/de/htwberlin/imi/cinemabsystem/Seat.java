@@ -1,7 +1,13 @@
 package de.htwberlin.imi.cinemabsystem;
 
-public class Seat {
+import java.io.Serializable;
 
+public class Seat implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int seatNum;
 	private boolean booked;
 	private char row;

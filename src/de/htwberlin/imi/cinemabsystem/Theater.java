@@ -3,12 +3,18 @@
  */
 package de.htwberlin.imi.cinemabsystem;
 
+import java.io.Serializable;
+
 /**
  * @author Mario Schuetz
  *
  */
-public class Theater {
+public class Theater implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int seats;
 	private int theaterNum;
 	

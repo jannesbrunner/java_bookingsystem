@@ -4,29 +4,40 @@
 package de.htwberlin.imi.cinemabsystem;
 import java.util.ArrayList;
 
+import java.io.Serializable;
 /**
  * @author Jannes Brunner, Katharina Wunder, Mario Schuetz
  *
  */
-public class Customer {
+public class Customer implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String lname;
 	private String fname;
 	private String pin;
+	private Booking booking;
 	
-	ArrayList<Booking> bookings;
 
 	public Customer(String username, String lname, String fname, String pin){
 		this.username = username;
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
-		bookings = new ArrayList<Booking>();
+		
+		
+		booking = new Booking();
 	}
 	
 	public String getUserName(){
 		return username;
+	}
+	
+	public Booking getBooking() {
+		return booking;
 	}
 	
 	public void setUserName(){
@@ -55,12 +66,9 @@ public class Customer {
 	public void setPin(){
 		
 	}
-	
-	public void addBooking(Booking bookingToAdd){
-		bookings.add(bookingToAdd);
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 	
-	public void rmvBooking(Booking bookingToRvm){
-		bookings.remove(bookingToRvm);
-	}
+	 
 }
