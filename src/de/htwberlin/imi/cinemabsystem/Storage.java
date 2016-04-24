@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class Storage {
 	
+	Customer loggedCustomer;
 	Customer customer;
 	ArrayList<Customer> customers;
 	ArrayList<Movie> movies;
@@ -65,23 +66,23 @@ public class Storage {
 	}
 	
 	// user login
-	public boolean userLogin(String username, String pin){
-		boolean found = false;
+	public Customer userLogin(String username, String pin){
+		Customer foundCustomer = null;
 		Iterator<Customer> it = customers.iterator();
 			
-			while(!found && it.hasNext()){
+			while(foundCustomer == null && it.hasNext()){
 				Customer tempCustomer = it.next();
 				String tempUn = tempCustomer.getUserName();
 				String userpin =  tempCustomer.getPin();
 				if(tempUn.equals(username) && userpin.equals(pin)){
 					System.out.println("Welcome back " + tempCustomer.getFName() + " " + tempCustomer.getLName());
-					found = true;
+					foundCustomer = tempCustomer;
 				}
 			}
-			if(!found){
+			if(foundCustomer == null){
 				System.out.println("Not a registered username or wrong password.");
 			}
-			return found;
+			return foundCustomer;
 	}
 	
 	// create new movies with title, length in min and price in EUR
@@ -172,7 +173,7 @@ public class Storage {
 				
 				chosenOne.bookSeat(seatToBook.charAt(seatToBook.length() - 1), Integer.valueOf(seatToBook.substring(0,seatToBook.length() - 1)));
 				System.out.println("You booked seat " + seatToBook.charAt(seatToBook.length() - 1) + Integer.valueOf(seatToBook.substring(0,seatToBook.length() - 1)) + ".");
-				
+				//Bookingsystem.getCustomer 
 				
 				
 			}
@@ -201,5 +202,9 @@ public class Storage {
 	public void bookSeat(){
 		
 		
+	}
+	
+	public void setCustomer(Customer loggedCustomer){
+		this.loggedCustomer = loggedCustomer;
 	}
 }
