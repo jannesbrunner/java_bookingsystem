@@ -77,6 +77,11 @@ public class Bookingsystem {
 				// register new customer
 				register();
 				break;
+				
+			case "book":
+				//book a show
+				book();
+				break;
 
 			default: // if the command is unknown
 				System.out.println("This command is unknown.");
@@ -105,6 +110,7 @@ public class Bookingsystem {
 		helpstorage.add(new HelpItem("program", "Prints out all available movies."));
 		helpstorage.add(new HelpItem("login", "Login in to your account. Username and PIN needed."));
 		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
+		helpstorage.add(new HelpItem("book", "Book a Show"));
 	}
 
 	private class HelpItem {
