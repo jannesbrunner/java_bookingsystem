@@ -26,8 +26,8 @@ public class Bookingsystem implements Serializable {
 
 	Bash bsh; // the bash (for user input)
 	ArrayList<HelpItem> helpstorage; // Holds help information
-	Database database;
-	String actualUser = "";
+	Storage storage;
+	String loggedUser = "";
 
 	public static void main(String[] args) {
 
@@ -42,9 +42,11 @@ public class Bookingsystem implements Serializable {
 		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
 														// for help information
 		setHelpitems(); // add new commands with description in this method
+
 		bsh.savehelp(helpstorage, "helpsystem.bin");
 		database = new Database();
 		database.createMovies();
+
 		printWelcome();
 	}
 
@@ -71,7 +73,7 @@ public class Bookingsystem implements Serializable {
 
 			case "program":
 				// prints all available movies
-				database.allMovies();
+				storage.allMovies();
 				break;
 				
 			case "login":
@@ -123,7 +125,7 @@ public class Bookingsystem implements Serializable {
 	 * @param pin		password 
 	 */	
 	private void register(){
-		if(actualUser.equals("")){
+		if(loggedUser.equals("")){
 			Scanner input = new Scanner(System.in);
 			String username;
 			String lname;
@@ -138,7 +140,7 @@ public class Bookingsystem implements Serializable {
 			fname = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.newCustomer(username, lname, fname, pin);
+			storage.newCustomer(username, lname, fname, pin);
 		}
 		else{
 			System.out.println("You are already registered and logged in.\n");
@@ -154,7 +156,7 @@ public class Bookingsystem implements Serializable {
 	private void login(){
 		boolean found = false;
 
-		if(actualUser.equals("")){
+		if(loggedUser.equals("")){
 			Scanner input = new Scanner(System.in);
 			String username;
 			String pin;
@@ -163,13 +165,26 @@ public class Bookingsystem implements Serializable {
 			username = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			database.userLogin(username, pin);
+			storage.userLogin(username, pin);
 			if(found){
-				actualUser = username;
+				loggedUser = username;
 			}
 		}
 		else{
 			System.out.println("You are already logged in.\n");
 		}
+	}
+	
+	private void book(){
+		storage.allMovies();
+		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("Your Choice: ");
+		int movieNum = input.nextInt();
+		storage.getSoC(movieNum);
+		
+		
+		
 	}
 }

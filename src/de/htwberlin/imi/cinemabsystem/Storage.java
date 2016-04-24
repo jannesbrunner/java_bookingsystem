@@ -11,17 +11,22 @@ package de.htwberlin.imi.cinemabsystem;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Database {
+public class Storage {
 	
 	Customer customer;
 	ArrayList<Customer> customers;
 	ArrayList<Movie> movies;
+	ArrayList<Show> shows;
+	ArrayList<Theater> theaters;
 	
-	public Database(){
+	public Storage(){
 		
 		createMovies();
 		createCustomers();
+		createTheaters();
 		testCustomer();
+		createShows();
+		
 		
 	}
 
@@ -95,6 +100,38 @@ public class Database {
 			System.out.println(cnt + " " + amovie.getTitle() + "    \n Duration: " + amovie.getDuration() + "\n");
 			cnt++;
 		}
-		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
+	}
+	
+	public void createTheaters(){
+		
+		theaters = new ArrayList<Theater>();		
+		theaters.add(new Theater(1, 100));		
+		theaters.add(new Theater(2, 80));		
+		theaters.add(new Theater(3, 50));		
+		theaters.add(new Theater(4, 140));
+	}
+	
+	/**
+	 * 
+	 */
+	public void createShows(){
+		
+		shows = new ArrayList<Show>();
+		shows.add(new Show(movies.get(0), theaters.get(0), 12 ));
+		shows.add(new Show(movies.get(1), theaters.get(1), 12 ));
+		shows.add(new Show(movies.get(2), theaters.get(2), 14 ));
+		shows.add(new Show(movies.get(3), theaters.get(3), 12 ));
+		shows.add(new Show(movies.get(3), theaters.get(3), 16 ));			
+	}
+	
+	public void getSoC(int choice){
+		
+		for(Show show : shows){
+			
+			show2compare = 
+			
+			if()
+		}
+		
 	}
 }
