@@ -153,7 +153,7 @@ public class Storage {
 			String tempUn = tempCustomer.getUserName();
 			String userpin = tempCustomer.getPin();
 			if (tempUn.equals(username) && userpin.equals(pin)) {
-				System.out.println("Welcome back " + tempCustomer.getFName() + " " + tempCustomer.getLName());
+				
 				foundCustomer = tempCustomer;
 			}
 		}
@@ -198,7 +198,7 @@ public class Storage {
 	}
 
 	// get Time of Choice
-	public void bookSeats(int choice) {
+	public Customer bookSeats(int choice, Customer customer) {
 
 		if (choice < shows.size()) {
 
@@ -216,23 +216,30 @@ public class Storage {
 				System.out.println(
 						"Which seat would you like to book?\nPlease state a seat and row number like shown above.");
 				String seatToBook = inputSeat.next();
-
-				chosenOne.bookSeat(seatToBook.charAt(seatToBook.length() - 1),
-						Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1)));
-				System.out.println("You booked seat " + seatToBook.charAt(seatToBook.length() - 1)
-						+ Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1)) + ".");
-				// Bookingsystem.getCustomer
+				char temprow = seatToBook.charAt(seatToBook.length() - 1);
+				int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
+				chosenOne.bookSeat(temprow,	tempseat);
+				System.out.println("You booked seat " + tempseat + temprow + ".");
+				//Creating ticket
+				Ticket bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
+				Booking temp = customer.getBooking();
+				temp.addTicket(bookedticket);
+				customer.setBooking(temp);
+				return customer;
+				
 
 			} else if (seats >= 2) {
 
 				inLine(seats);
+				return customer;
 
 			}
 
 		} else {
 			System.out.println("Not a valid choice.");
+			return customer;
 		}
-
+		return customer;
 	}
 	
 	// Checks if seats in row or not

@@ -19,19 +19,25 @@ public class Customer implements Serializable  {
 	private String lname;
 	private String fname;
 	private String pin;
+	private Booking booking;
 	
-	ArrayList<Booking> bookings;
 
 	public Customer(String username, String lname, String fname, String pin){
 		this.username = username;
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
-		bookings = new ArrayList<Booking>();
+		
+		
+		booking = new Booking();
 	}
 	
 	public String getUserName(){
 		return username;
+	}
+	
+	public Booking getBooking() {
+		return booking;
 	}
 	
 	public void setUserName(){
@@ -60,12 +66,9 @@ public class Customer implements Serializable  {
 	public void setPin(){
 		
 	}
-	
-	public void addBooking(Booking bookingToAdd){
-		bookings.add(bookingToAdd);
+	public void setBooking(Booking booking) {
+		this.booking = booking;
 	}
 	
-	public void rmvBooking(Booking bookingToRvm){
-		bookings.remove(bookingToRvm);
-	}
+	 
 }
