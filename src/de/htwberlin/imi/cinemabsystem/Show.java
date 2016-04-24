@@ -5,28 +5,29 @@ import java.util.Arrays;
 
 public class Show {
 	
-	static Movie movie;
-	static Theater test = new Theater(1, 100);
-	static int seatsPerRow = 20;
-	static Theater theater;
-	static double time;
-	static int seatNumber = test.getSeats();;
-	static int overflowSeats = seatNumber%seatsPerRow;
-	static int noOverflowSeats = (seatNumber - overflowSeats)/seatsPerRow;
-	static int rows = noOverflowSeats+1;
-	static char r = 'A';
+	private Movie movie;
+	//private Theater test = new Theater(1, 100);
+	private int seatsPerRow = 20;
+	private Theater theater;
+	private double time;
+	private int seatNumber = theater.getSeats();;
+	private int overflowSeats = seatNumber%seatsPerRow;
+	private int noOverflowSeats = (seatNumber - overflowSeats)/seatsPerRow;
+	private int rows = noOverflowSeats+1;
+	private char r = 'A';
 
 	
-	static Seat[][] room = new Seat[rows][];
+	public Seat[][] room = new Seat[rows][];
 	
 
 	public static void main(String[] args) {
-		createSeating(test);
-		showSeating();
+		
+		//createSeating(test);
+		//showSeating();
 
-		bookSeat('E', 6);
-		bookSeat('F', 6);
-		unbookSeat('F', 6);
+		//bookSeat('E', 6);
+		//bookSeat('F', 6);
+		//unbookSeat('F', 6);
 		//showSeating();
 		
 	}
@@ -51,7 +52,7 @@ public class Show {
 	public double getTime(){
 		return time;
 	}
-	public static void createSeating(Theater theater){
+	public void createSeating(Theater theater){
 		
 		for (int i = 0; i < rows; i++){
 		room[i] = new Seat [seatsPerRow];
@@ -83,7 +84,7 @@ public class Show {
 	
 		}
 	
-	public static void showSeating(){
+	public void showSeating(){
 		
 		for (int y = 0; y <= room.length-1; y++){
 			for (int x = 0; x <= room[y].length-1; x++){
@@ -100,7 +101,7 @@ public class Show {
 		}
 	}
 	
-	public static void bookSeat(char row, int seat){
+	public void bookSeat(char row, int seat){
 		
 		if (seat > seatsPerRow || seat > r){
 			System.out.println("Invalid seat number. Please try again.");
@@ -125,7 +126,7 @@ public class Show {
 		}
 	}
 		
-	public static void unbookSeat(char row, int seat){
+	public void unbookSeat(char row, int seat){
 		
 		if (seat > seatsPerRow || seat > r){
 			System.out.println("Invalid seat number. Please try again.");
