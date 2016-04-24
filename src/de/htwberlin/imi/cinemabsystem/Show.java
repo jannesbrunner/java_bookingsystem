@@ -112,6 +112,7 @@ public class Show {
 		
 		if (seat > seatsPerRow || seat > r){
 			System.out.println("Invalid seat number. Please try again.");
+			return;
 		}
 		
 		
@@ -137,6 +138,7 @@ public class Show {
 		
 		if (seat > seatsPerRow || seat > r){
 			System.out.println("Invalid seat number. Please try again.");
+			return;
 		}
 		
 		
@@ -155,7 +157,63 @@ public class Show {
 				
 				
 			}
+		}	
+	}
+
+	public void bookRow (int seatFrom, char rowFrom, int seatTo, char rowTo){
+		
+		if (seatFrom > seatsPerRow || rowFrom > r || seatTo > seatsPerRow || rowTo > r){
+			System.out.println("Invalid seat number. Please try again.");
+			return;
 		}
 		
+		boolean nowBooking = false;
+		
+		for (int y = 0; y <= room.length-1; y++){
+			for (int x = 0; x <= room[y].length-1; x++){
+				Seat currentSeat = room[y][x];
+				
+				if (!nowBooking && (currentSeat.getSeatNum() == seatFrom && currentSeat.getRow() == rowFrom || currentSeat.getSeatNum() == seatTo && currentSeat.getRow() == rowTo)){
+					if (!currentSeat.isBooked()){
+						
+						currentSeat.book();
+						nowBooking = true;
+						
+					}
+					
+					else {
+						System.out.println("Seat " + currentSeat.getSeatNum()  + currentSeat.getRow() + " is aready booked. Please try othere seats");
+						return; 
+					}
+				}
+				else if (nowBooking){
+					if (!currentSeat.isBooked()){
+						
+						currentSeat.book();
+					
+					}
+				}
+					
+				else if (nowBooking && (currentSeat.getSeatNum() == seatFrom && currentSeat.getRow() == rowFrom || currentSeat.getSeatNum() == seatTo && currentSeat.getRow() == rowTo)){
+					if (!currentSeat.isBooked()){
+						
+						currentSeat.book();
+						return;
+						
+					}
+					
+					else {
+						System.out.println("Seat " + currentSeat.getSeatNum()  + currentSeat.getRow() + " is aready booked. Please try othere seats");
+						return; 
+					}
+					
+					
+				}
+				
+				
+			}
+		}	
 	}
+	
+	
 }
