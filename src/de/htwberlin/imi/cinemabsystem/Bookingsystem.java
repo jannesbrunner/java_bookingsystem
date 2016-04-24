@@ -44,8 +44,8 @@ public class Bookingsystem implements Serializable {
 		setHelpitems(); // add new commands with description in this method
 
 		bsh.savehelp(helpstorage, "helpsystem.bin");
-		database = new Database();
-		database.createMovies();
+		storage = new Storage();
+		storage.createMovies();
 
 		printWelcome();
 	}
