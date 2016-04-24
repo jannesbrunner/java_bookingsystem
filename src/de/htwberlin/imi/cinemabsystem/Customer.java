@@ -2,6 +2,7 @@
  * 
  */
 package de.htwberlin.imi.cinemabsystem;
+import java.util.ArrayList;
 
 /**
  * @author Jannes Brunner, Katharina Wunder, Mario Schuetz
@@ -13,12 +14,15 @@ public class Customer {
 	private String lname;
 	private String fname;
 	private String pin;
+	
+	ArrayList<Booking> bookings;
 
 	public Customer(String username, String lname, String fname, String pin){
 		this.username = username;
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
+		bookings = new ArrayList<Booking>();
 	}
 	
 	public String getUserName(){
@@ -52,4 +56,11 @@ public class Customer {
 		
 	}
 	
+	public void addBooking(Booking bookingToAdd){
+		bookings.add(bookingToAdd);
+	}
+	
+	public void rmvBooking(Booking bookingToRvm){
+		bookings.remove(bookingToRvm);
+	}
 }
