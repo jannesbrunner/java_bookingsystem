@@ -35,7 +35,7 @@ public class Bookingsystem implements Serializable {
 		// creating new System and get it run
 		final Bookingsystem system = new Bookingsystem();
 		system.run();
-		
+	
 
 	}
 
@@ -75,6 +75,13 @@ public class Bookingsystem implements Serializable {
 				// user login
 				login();
 				break;
+				
+			case "logout":
+				// user logout
+				this.loggedUser = "";
+				this.currentCustomer = null;
+				System.out.println("Good bye!");
+				
 				
 			case "register":
 				// register new customer
@@ -147,7 +154,7 @@ public class Bookingsystem implements Serializable {
 	 * @param found checks for already existing username
 	 */
 	private void login(){
-		boolean found = false;
+		
 
 		if(loggedUser.equals("")){
 			   Scanner input = new Scanner(System.in);
@@ -162,7 +169,7 @@ public class Bookingsystem implements Serializable {
 			    
 			    loggedUser = username;
 			    currentCustomer = storage.findCustomer(username, pin);
-			    
+			    System.out.println("Welcome back " + currentCustomer.getFName() + " " + currentCustomer.getLName());
 			   }
 			  }
 		else{
@@ -170,7 +177,14 @@ public class Bookingsystem implements Serializable {
 		}
 	}
 	
+	
+	
 	private void book(){
+		if(loggedUser.equals("")) {
+			System.out.println("Pls login first!");
+			login();
+		}
+		else {
 		storage.allMovies();
 		System.out.println("To see more details about the movie of your choice \ntype the number in front of it.\n");
 		
@@ -179,7 +193,9 @@ public class Bookingsystem implements Serializable {
 		int movieNum = input.nextInt();
 		storage.getSoC(movieNum);
 		int choice = input.nextInt();
-		storage.bookSeats(choice);
+		
+		this.currentCustomer = storage.bookSeats(choice, currentCustomer);
+		}
 	}
 	
 	/*
@@ -219,7 +235,7 @@ public class Bookingsystem implements Serializable {
 		saveShows();
 		saveTheaters();
 		saveHelp();
-		System.out.println("All date saved sucessfuly!");
+		System.out.println("All date saved sucessfully!");
 		
 	}
 	

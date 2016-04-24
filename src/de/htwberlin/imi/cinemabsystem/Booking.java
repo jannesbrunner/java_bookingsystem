@@ -6,8 +6,9 @@ public class Booking {
 
 	ArrayList<Ticket> tickets;
 	
-	public Booking(ArrayList<Ticket> tickets){
-		this.tickets = tickets;
+	public Booking() {
+		this.tickets = new ArrayList<Ticket>();
+	
 	}
 	
 	public void addTicket(Ticket ticketToAdd){
