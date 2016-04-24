@@ -127,22 +127,16 @@ public class Storage {
 	public void getSoC(int choice){
 		
 		String userchoice = shows.get(choice).getMovie().getTitle();
-		String times = "Your movie starts at \n"; 
-		System.out.println(userchoice);
+		String times = "Your movie starts at \n";
 	
 		for(Show show : shows){
-			System.out.println("##################");
-			System.out.println(show);
-			System.out.println(show.getMovie());			
 			
 			String show2compare = show.getMovie().getTitle();
-			System.out.println(show2compare);
 			
 			if(userchoice.equals(show2compare)){
 				times += show.getTime() + "\n";
-				System.out.println(show.getTime());
 			}
 		}
-		System.out.println(times + "0");		
+		System.out.println(times);		
 	}
 }
