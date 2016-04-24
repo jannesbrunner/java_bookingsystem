@@ -1,7 +1,13 @@
 package de.htwberlin.imi.cinemabsystem;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String title;
 	private double price;
 	private int duration;

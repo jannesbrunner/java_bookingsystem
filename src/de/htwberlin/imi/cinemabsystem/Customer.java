@@ -3,12 +3,17 @@
  */
 package de.htwberlin.imi.cinemabsystem;
 
+import java.io.Serializable;
 /**
  * @author Jannes Brunner, Katharina Wunder, Mario Schuetz
  *
  */
-public class Customer {
+public class Customer implements Serializable  {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String lname;
 	private String fname;

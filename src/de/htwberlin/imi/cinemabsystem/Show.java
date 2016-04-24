@@ -1,10 +1,15 @@
 package de.htwberlin.imi.cinemabsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Show {
+public class Show implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Movie movie;
 	private Theater theater;
 	private double time;

@@ -4,7 +4,7 @@
 package de.htwberlin.imi.cinemabsystem;
 
 import java.util.Scanner;
-import java.util.ArrayList; // for the help storage
+import java.util.ArrayList; // for casting @loading
 import java.io.Serializable;
 
 /**
@@ -24,29 +24,26 @@ public class Bookingsystem implements Serializable {
 	 *            Not in use yet
 	 */
 
-	Bash bsh; // the bash (for user input)
-	ArrayList<HelpItem> helpstorage; // Holds help information
+	IO_system bsh; // the IO_System (for user input and file reading/writing)
+	
 	Storage storage;
 	String loggedUser = "";
 
 	public static void main(String[] args) {
 
 		// creating new System and get it run
-		Bookingsystem system = new Bookingsystem();
+		final Bookingsystem system = new Bookingsystem();
 		system.run();
+		
 
 	}
 
 	public Bookingsystem() {
-		this.bsh = new Bash(); // Setting up the Bash
-		this.helpstorage = new ArrayList<HelpItem>(); // Setting up the storage
-														// for help information
-		setHelpitems(); // add new commands with description in this method
-
-		bsh.savehelp(helpstorage, "helpsystem.bin");
+		this.bsh = new IO_system(); // Setting up the IO_system
+						
 		storage = new Storage();
-		storage.createMovies();
-
+		// storage.createMovies(); Duplicate? Already done in storage constructor @jay
+		loadData(); // load Data from files into Storage
 		printWelcome();
 	}
 
@@ -61,10 +58,8 @@ public class Bookingsystem implements Serializable {
 			switch (command) {// evaluating the commands
 			case "help":
 
-				for (HelpItem x : helpstorage) {
-					System.out.println(x.getName() + " : " + x.getDescription());
-				}
-				System.out.println("\n");
+				storage.printHelpinformation();
+				
 				break;
 
 			case "quit":
@@ -99,6 +94,7 @@ public class Bookingsystem implements Serializable {
 		}
 
 		System.out.println("Good bye");
+		saveAll(); // save all data on disk!
 	}
 	
 	/**
@@ -112,16 +108,7 @@ public class Bookingsystem implements Serializable {
 		
 	}
 
-	private void setHelpitems() {
-		helpstorage.add(new HelpItem("quit", "To exit the program"));
-		helpstorage.add(new HelpItem("test", "Just to test the Help system"));
-		helpstorage.add(new HelpItem("program", "Prints out all available movies."));
-		helpstorage.add(new HelpItem("login", "Login in to your account. Username and PIN needed."));
-		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
-		helpstorage.add(new HelpItem("book", "Book a Show"));
-	}
-
-	
+		
 	
 	/**
 	 * register new customers. no username duplicates
@@ -192,5 +179,77 @@ public class Bookingsystem implements Serializable {
 		
 		
 		
+	}
+	
+	/*
+	 * Loads data from particular files to the Storage
+	 * 
+	 */
+	public void loadData() {
+		
+		Object raw = null;
+		
+		raw = bsh.load("customers.bin");
+		storage.setCustomersfromfile(raw);
+		
+		raw = bsh.load("movies.bin");
+		storage.setMoviesfromfile(raw);
+		 
+		raw = bsh.load("shows.bin");
+		storage.setShowsfromfile(raw);
+		
+		raw = bsh.load("theaters.bin");
+		storage.setTheatersfromfile(raw);
+		
+		raw = bsh.load("help.bin");
+		storage.setHelpfromfile(raw);
+		
+		System.out.println("( Loading Data successfull.");
+			
+	}
+	
+	/*
+	 * Saves data from the Storage to disk
+	 */
+	public void saveAll() {
+		
+		saveCustomers();
+		saveMovies();
+		saveShows();
+		saveTheaters();
+		saveHelp();
+		
+	}
+	
+	//
+	
+	public void saveCustomers() {
+		ArrayList<Customer> savec;
+		savec = storage.getCustomers();
+		bsh.savecustomers(savec);
+	}
+	
+	public void saveMovies() {
+		ArrayList<Movie> savem;
+		savem = storage.getMovies();
+		bsh.savemovies(savem);
+	}
+	
+	public void saveShows() {
+		ArrayList<Show> saves;
+		saves = storage.getShows();
+		bsh.saveshows(saves);
+	}
+	
+	public void saveTheaters() {
+		ArrayList<Theater> savet;
+		savet = storage.getTheaters();
+		bsh.savetheaters(savet);
+	}
+	
+	public void saveHelp() {
+		ArrayList<HelpItem> saveh;
+		saveh = storage.getHelpstorage();
+		bsh.savehelp(saveh);
 	}
 }
