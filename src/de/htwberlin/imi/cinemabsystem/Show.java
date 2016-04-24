@@ -10,14 +10,13 @@ public class Show {
 	private double time;
 	
 	private int seatsPerRow;
-	private int seatNumber;
 	private int overflowSeats;
 	private int noOverflowSeats;
 	private int rows;
 	private char r;
 
 	
-	public Seat[][] room = new Seat[rows][];
+	public Seat[][] room;
 	
 
 	public static void main(String[] args) {
@@ -42,6 +41,8 @@ public class Show {
 		noOverflowSeats = (theater.getSeats() - overflowSeats)/seatsPerRow;
 		rows = noOverflowSeats+1;
 		r = 'A';
+		
+		room = new Seat[rows][];
 		
 		createSeating(theater);
 		

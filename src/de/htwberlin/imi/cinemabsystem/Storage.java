@@ -128,9 +128,8 @@ public class Storage {
 		
 		for(Show show : shows){
 			
-			show2compare = 
 			
-			if()
+			
 		}
 		
 	}
