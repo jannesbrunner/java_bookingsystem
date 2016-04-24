@@ -6,15 +6,15 @@ import java.util.Arrays;
 public class Show {
 	
 	private Movie movie;
-	//private Theater test = new Theater(1, 100);
-	private int seatsPerRow = 20;
 	private Theater theater;
 	private double time;
-	private int seatNumber = theater.getSeats();;
-	private int overflowSeats = seatNumber%seatsPerRow;
-	private int noOverflowSeats = (seatNumber - overflowSeats)/seatsPerRow;
-	private int rows = noOverflowSeats+1;
-	private char r = 'A';
+	
+	private int seatsPerRow;
+	private int seatNumber;
+	private int overflowSeats;
+	private int noOverflowSeats;
+	private int rows;
+	private char r;
 
 	
 	public Seat[][] room = new Seat[rows][];
@@ -36,6 +36,12 @@ public class Show {
 		this.movie = movie;
 		this.theater = theater;
 		this.time = time;
+		
+		seatsPerRow = 20;
+		overflowSeats = theater.getSeats()%seatsPerRow;
+		noOverflowSeats = (theater.getSeats() - overflowSeats)/seatsPerRow;
+		rows = noOverflowSeats+1;
+		r = 'A';
 		
 		createSeating(theater);
 		
