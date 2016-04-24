@@ -41,4 +41,19 @@ public class Booking {
 		return oneTicket;
 		
 	}
+	
+	public void printAllTickets(){
+		
+		for (Ticket ticket : tickets){
+		
+		System.out.println("#################################################");
+		System.out.println("###               JEM-Cinema                  ###");
+		System.out.println(" ## Theater  Seat  Row             Price      ## ");
+		System.out.println("###" +ticket.getTheater() + " " + ticket.getSeat().getSeatNum() + " " + ticket.getSeat().getRow() + "    " + ticket.getMovie().getPrice() +        "      ###");
+		System.out.println(" ## Movie                                     ## ");
+		System.out.println("### " + ticket.getMovie().getTitle().substring(0, 30) + "                   ###");
+		System.out.println("#################################################\n");
+		System.out.println();
+		}
+	}
 }

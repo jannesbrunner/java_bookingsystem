@@ -6,15 +6,10 @@ import java.util.Arrays;
 public class Show {
 	
 	static Movie movie;
-<<<<<<< HEAD
 	static Theater test = new Theater(1, 100);
 	static int seatsPerRow = 20;
-=======
-	static Theater test = new Theater(50);
 	static Theater theater;
 	static double time;
-	static int seatsPerRow = 10;
->>>>>>> 1f318738a52538639826bab375435d9425319864
 	static int seatNumber = test.getSeats();;
 	static int overflowSeats = seatNumber%seatsPerRow;
 	static int noOverflowSeats = (seatNumber - overflowSeats)/seatsPerRow;
@@ -28,19 +23,12 @@ public class Show {
 	public static void main(String[] args) {
 		createSeating(test);
 		showSeating();
-<<<<<<< HEAD
-		bookSeat('e', 6);
-		bookSeat('f', 6);
-		unbookSeat('f', 6);
-		showSeating();
-=======
+
 		bookSeat('E', 6);
 		bookSeat('F', 6);
 		unbookSeat('F', 6);
 		//showSeating();
 		
-
->>>>>>> 1f318738a52538639826bab375435d9425319864
 	}
 	public Show(Movie movie, Theater theater, double time){
 		
