@@ -3,6 +3,7 @@
  */
 package de.htwberlin.imi.cinemabsystem;
 
+import java.util.Scanner;
 import java.util.ArrayList; // for the help storage
 
 /**
@@ -21,6 +22,7 @@ public class Bookingsystem {
 	Bash bsh; // the bash (for user input)
 	ArrayList<HelpItem> helpstorage; // Holds help information
 	Database database;
+	String actualUser = "";
 
 	public static void main(String[] args) {
 
@@ -37,6 +39,7 @@ public class Bookingsystem {
 		setHelpitems(); // add new commands with description in this method
 		database = new Database();
 		database.createMovies();
+		printWelcome();
 	}
 
 	public void run() {
@@ -53,7 +56,7 @@ public class Bookingsystem {
 				for (HelpItem x : helpstorage) {
 					System.out.println(x.getName() + " : " + x.getDescription());
 				}
-
+				System.out.println("\n");
 				break;
 
 			case "quit":
@@ -63,6 +66,16 @@ public class Bookingsystem {
 			case "program":
 				// prints all available movies
 				database.allMovies();
+				break;
+				
+			case "login":
+				// user login
+				login();
+				break;
+				
+			case "register":
+				// register new customer
+				register();
 				break;
 
 			default: // if the command is unknown
@@ -74,11 +87,24 @@ public class Bookingsystem {
 
 		System.out.println("Good bye");
 	}
+	
+	/**
+	 * will print the welcome screen
+	 */
+	private void printWelcome(){
+		System.out.println("#############################");
+		System.out.println("### Welcome to JEM-Cinema ###");
+		System.out.println("#############################\n");
+		System.out.println("What would you like to do? \nType 'help' to see available commands.\n");
+		
+	}
 
 	private void setHelpitems() {
 		helpstorage.add(new HelpItem("quit", "To exit the program"));
 		helpstorage.add(new HelpItem("test", "Just to test the Help system"));
-
+		helpstorage.add(new HelpItem("program", "Prints out all available movies."));
+		helpstorage.add(new HelpItem("login", "Login in to your account. Username and PIN needed."));
+		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
 	}
 
 	private class HelpItem {
@@ -108,5 +134,62 @@ public class Bookingsystem {
 		}
 
 	}
+	
+	/**
+	 * register new customers. no username duplicates
+	 * @param username	loginname
+	 * @param lname		lastname
+	 * @param fname		firstname
+	 * @param pin		password 
+	 */	
+	private void register(){
+		if(actualUser.equals("")){
+			Scanner input = new Scanner(System.in);
+			String username;
+			String lname;
+			String fname;
+			String pin;
+			
+			System.out.print("Username: ");
+			username = input.nextLine();		
+			System.out.print("Lastname: ");
+			lname = input.nextLine();
+			System.out.print("Firstname: ");
+			fname = input.nextLine();
+			System.out.print("PIN: ");
+			pin = input.nextLine();
+			database.newCustomer(username, lname, fname, pin);
+		}
+		else{
+			System.out.println("You are already registered and logged in.\n");
+		}
+	}
+	
+	/**
+	 * login for registered users
+	 * @param username
+	 * @param pin
+	 * @param found checks for already existing username
+	 */
+	private void login(){
+		boolean found = false;
 
+		if(actualUser.equals("")){
+			Scanner input = new Scanner(System.in);
+			String username;
+			String pin;
+		
+			System.out.print("Username: ");
+			username = input.nextLine();
+			System.out.print("PIN: ");
+			pin = input.nextLine();
+			database.userLogin(username, pin);
+			if(found){
+				actualUser = username;
+			}
+		}
+		else{
+			System.out.println("You are already logged in.\n");
+		}
+	}
 }
