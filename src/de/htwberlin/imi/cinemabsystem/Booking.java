@@ -56,4 +56,14 @@ public class Booking {
 		System.out.println();
 		}
 	}
+	
+	public double getTotalPrice(){
+		
+		double totalPrice = 0;
+		for (Ticket ticket : tickets){
+			totalPrice = totalPrice + ticket.getMovie().getPrice();
+		}
+	
+		return totalPrice;
+	}
 }
