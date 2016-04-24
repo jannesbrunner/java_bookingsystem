@@ -29,6 +29,7 @@ public class Bookingsystem implements Serializable {
 	Storage storage;
 	String loggedUser = "";
 
+
 	public static void main(String[] args) {
 
 		// creating new System and get it run
@@ -171,9 +172,11 @@ public class Bookingsystem implements Serializable {
 			username = input.nextLine();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
-			storage.userLogin(username, pin);
-			if(found){
+			if(storage.userLogin(username, pin) != null){
+				
 				loggedUser = username;
+				storage.loggedCustomer = storage.userLogin(username, pin);
+				
 			}
 		}
 		else{
@@ -192,4 +195,5 @@ public class Bookingsystem implements Serializable {
 		int choice = input.nextInt();
 		storage.bookSeats(choice);
 	}
+	
 }
