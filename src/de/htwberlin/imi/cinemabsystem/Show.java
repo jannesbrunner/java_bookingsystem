@@ -107,11 +107,11 @@ public class Show implements Serializable {
 		}
 	}
 
-	public void bookSeat(char row, int seat) {
+	public int bookSeat(char row, int seat) {
 
 		if (seat > seatsPerRow || seat > r) {
 			System.out.println("Invalid seat number. Please try again.");
-			return;
+			return 0;
 		}
 
 		for (int y = 0; y <= room.length - 1; y++) {
@@ -128,6 +128,7 @@ public class Show implements Serializable {
 
 			}
 		}
+		return 1;
 	}
 
 	public void unbookSeat(char row, int seat) {
@@ -152,63 +153,7 @@ public class Show implements Serializable {
 			}
 		}
 	}
-
-	public void bookRow(int seatFrom, char rowFrom, int seatTo, char rowTo) {
-
-		if (seatFrom > seatsPerRow || rowFrom > r || seatTo > seatsPerRow || rowTo > r) {
-			System.out.println("Invalid seat number. Please try again.");
-			return;
-		}
-
-		boolean nowBooking = false;
-
-		for (int y = 0; y <= room.length - 1; y++) {
-			for (int x = 0; x <= room[y].length - 1; x++) {
-				Seat currentSeat = room[y][x];
-
-				if (!nowBooking && (currentSeat.getSeatNum() == seatFrom && currentSeat.getRow() == rowFrom
-						|| currentSeat.getSeatNum() == seatTo && currentSeat.getRow() == rowTo)) {
-					if (!currentSeat.isBooked()) {
-
-						currentSeat.book();
-						nowBooking = true;
-
-					}
-
-					else {
-						System.out.println("Seat " + currentSeat.getSeatNum() + currentSeat.getRow()
-								+ " is aready booked. Please try othere seats");
-						return;
-					}
-				} else if (nowBooking) {
-					if (!currentSeat.isBooked()) {
-
-						currentSeat.book();
-
-					}
-				}
-
-				else if (nowBooking && (currentSeat.getSeatNum() == seatFrom && currentSeat.getRow() == rowFrom
-						|| currentSeat.getSeatNum() == seatTo && currentSeat.getRow() == rowTo)) {
-					if (!currentSeat.isBooked()) {
-
-						currentSeat.book();
-						return;
-
-					}
-
-					else {
-						System.out.println("Seat " + currentSeat.getSeatNum() + currentSeat.getRow()
-								+ " is aready booked. Please try othere seats");
-						return;
-					}
-
-				}
-
-			}
-		}
-	}
-
+	
 	public Seat getSeat(char row, int seatNum) {
 
 		for (int y = 0; y <= room.length - 1; y++) {
