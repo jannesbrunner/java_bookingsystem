@@ -2,19 +2,15 @@
  * 
  */
 package de.htwberlin.imi.cinemabsystem;
-import java.util.ArrayList;
 
 import java.io.Serializable;
+
 /**
  * @author Jannes Brunner, Katharina Wunder, Mario Schuetz
  *
  */
-public class Customer implements Serializable  {
+public class Customer implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private String username;
 	private String lname;
 	private String fname;
@@ -27,9 +23,8 @@ public class Customer implements Serializable  {
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
-		
-		
 		booking = new Booking();
+		// System.out.println("Booking angelegt");
 	}
 	
 	public String getUserName(){
