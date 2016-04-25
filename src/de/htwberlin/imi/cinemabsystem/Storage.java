@@ -297,8 +297,16 @@ public class Storage {
 			Ticket x = customerBooking.tickets.get(TicketId);
 			Movie target = x.getMovie();
 			Theater target2 = x.getTheater();
-			double time = // HIER GET ES WEITER
-					// TODO 
+			double time = x.getStartTime();
+			
+			for (Iterator<Show> iterator = shows.iterator(); iterator.hasNext();) {
+				Show show = (Show) iterator.next();
+				if(show.getMovie().equals(target) && show.getTheater() == target2 && show.getTime() == time) {
+					show.unbookSeat(row2delete, seat2delete);
+				}
+				
+			}
+			
 			customerBooking.tickets.remove(TicketId);
 			currentCustomer.setBooking(customerBooking);
 			System.out.println("Ticket sucessfully deleted.");
@@ -339,11 +347,13 @@ public class Storage {
 	// }
 
 	/*
+	 * (Called by factory Reset)
 	 * HERE BEGINS THE DEMO SETUP! Not necessary if you load from files.
-	 */
+	 */ 
 	// default customers to load the customers arraylist
 	public void testCustomer() {
-
+		
+		customers.clear();
 		customers.add(new Customer("Jay", "Bee", "Jay", "1234"));
 		customers.add(new Customer("Eli", "Gould", "Eli", "0815"));
 		customers.add(new Customer("mayo", "Schuetz", "Mario", "1337"));
@@ -351,7 +361,7 @@ public class Storage {
 
 	// create new movies with title, length in min and price in EUR
 	public void createMovies() {
-
+		movies.clear();
 		movies.add(new Movie("Pulp Fiction", 154, 10.5));
 		movies.add(new Movie("The Usual Suspect", 106, 10.5));
 		movies.add(new Movie("Star Wars 4 - 6", 378, 33.33));
@@ -360,7 +370,8 @@ public class Storage {
 
 	// default Cinema Setup
 	public void createTheaters() {
-
+		
+		theaters.clear();
 		theaters.add(new Theater(1, 100));
 		theaters.add(new Theater(2, 80));
 		theaters.add(new Theater(3, 50));
@@ -369,7 +380,7 @@ public class Storage {
 
 	// default Shows Setup
 	public void createShows() {
-
+		shows.clear();
 		shows.add(new Show(movies.get(0), theaters.get(0), 12));
 		shows.add(new Show(movies.get(1), theaters.get(1), 12));
 		shows.add(new Show(movies.get(2), theaters.get(2), 14));
@@ -380,6 +391,7 @@ public class Storage {
 
 	// create Help Items
 	private void createHelpitems() {
+		helpstorage.clear();
 		helpstorage.add(new HelpItem("quit", "To exit the program"));
 		helpstorage.add(new HelpItem("test", "Just to test the Help system"));
 		helpstorage.add(new HelpItem("program", "Prints out all available movies."));

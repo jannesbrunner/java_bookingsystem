@@ -140,6 +140,7 @@ public class Bookingsystem implements Serializable {
 		System.out.println("==Factory Reset===");
 		this.storage = new Storage();
 		storage.resetData();
+		saveAll();
 		System.out.println("Factory Reset was successfull.");
 	}
 
@@ -252,7 +253,7 @@ public class Bookingsystem implements Serializable {
 			try {
 
 				int movieNum = input.nextInt();
-				storage.getSoC(movieNum);
+				storage.getSoC(movieNum-1);
 				int choice = input.nextInt();
 
 				this.currentCustomer = storage.bookSeats(choice, currentCustomer);
