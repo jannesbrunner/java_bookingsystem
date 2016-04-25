@@ -208,6 +208,7 @@ public class Storage {
 	public Customer bookSeats(int choice, Customer customer) {
 		  Ticket bookedticket = null; // Holds later the booked ticket
 		  Booking userbooking = null; 
+		  userbooking = customer.getBooking();
 		  
 		  if (choice < shows.size()) {
 
@@ -232,10 +233,14 @@ public class Storage {
 		     chosenOne.bookSeat(temprow, tempseat);
 		     System.out.println("You booked seat " + tempseat + temprow + ".");
 		     //Creating ticket
-		     bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-		     userbooking = customer.getBooking();
+		     
+		     
+		    
+		     int ticketno = userbooking.getHighesticketno() +1;
+		     bookedticket = new Ticket(ticketno, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
 		     userbooking.addTicket(bookedticket);
 		     customer.setBooking(userbooking);
+		     
 		     return customer;
 		     
 
@@ -256,8 +261,9 @@ public class Storage {
 		        
 		        System.out.println("You booked seat " + tempseat + temprow + ".");
 		        //Creating ticket
-		        bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-		        userbooking = customer.getBooking();
+		        int ticketno = userbooking.getHighesticketno() +1;
+		        bookedticket = new Ticket(ticketno, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
+		        
 		        userbooking.addTicket(bookedticket);
 		        customer.setBooking(userbooking);
 		       };

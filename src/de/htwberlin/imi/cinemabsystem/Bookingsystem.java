@@ -211,10 +211,14 @@ public class Bookingsystem implements Serializable {
 			if (currentCustomer.getBooking().tickets.isEmpty()) {
 				System.out.println("You don't have a booking history.");
 			} else {
+				System.out.println("Total amount of booked Tickets: "+currentCustomer.getBooking().getAmountoftickets()+ "\n");
 				for (int i = 0; i < currentCustomer.getBooking().tickets.size(); i++) {
+					int ticketno = currentCustomer.getBooking().tickets.get(i).getTicketNum();
 					String movie = currentCustomer.getBooking().tickets.get(i).getMovie().getTitle();
+					Integer seatrow = new Integer(currentCustomer.getBooking().tickets.get(i).getSeat().getSeatNum());
+					String seat =  seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
 					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
-					System.out.println("Titel " + movie + " Date/Time " + starttime);
+					System.out.println("Ticket #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
 				}
 			}
 		}
