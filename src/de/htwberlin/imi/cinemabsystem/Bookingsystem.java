@@ -93,8 +93,7 @@ public class Bookingsystem implements Serializable {
 				break;
 
 			case "history":
-				//showHistory();
-				currentCustomer.getBooking().printAllTickets();
+				showHistory();
 				break;
 
 			case "reset":

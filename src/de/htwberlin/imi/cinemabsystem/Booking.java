@@ -64,7 +64,10 @@ public class Booking implements Serializable {
 		System.out.println("#################################################\n");
 		System.out.println();
 		}
+		
+		System.out.println("Total price of all tickets: " + getTotalPrice());
 	}
+	
 	
 	public double getTotalPrice(){
 		
