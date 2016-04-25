@@ -242,10 +242,10 @@ public class Storage {
 
 			} else if (seats >= 2) {
 
-				if (inLine(seats) == 1){
+				if (inLine(seats) == 2){
 					
 					for (int i = 0; i < seats;i++){
-						System.out.println("Which seat would you like to book?\nPlease state a seat and row number like shown above.\nThere are " + seats + " seats left.");
+						System.out.println("Which seat would you like to book?\nPlease state a seat and row number like shown above.\nThere are " + (seats - i) + " seats left.");
 						Scanner inputSeat = new Scanner(System.in);
 						String seatToBook = inputSeat.next();
 						char temprow = seatToBook.charAt(seatToBook.length() - 1);
@@ -253,16 +253,32 @@ public class Storage {
 						int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
 						chosenOne.bookSeat(temprow,	tempseat);
 						System.out.println("You booked seat " + tempseat + temprow + ".");
+						//Creating ticket
+						bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
+						userbooking = customer.getBooking();
+						userbooking.addTicket(bookedticket);
+						customer.setBooking(userbooking);
 						
 					}
+					System.out.println("Thank you for your order! Enjoy your movie.");
 					
 					return customer;
 				}
-				else if (inLine(seats) == 2){
+				else if (inLine(seats) == 1){
 					
 					System.out.println("From which seat to which seat do you want to reserve?\nPlease state your selection as follows: 00X-01Y");
 					Scanner inputSeat = new Scanner(System.in);
 					String seatToBook = inputSeat.next();
+					String test = seatToBook;
+					
+					String[] parts = test.split("-", 2);
+					String seat1 = parts[0];
+					String seat2 = parts[1]; 
+					
+					System.out.println(test);
+					System.out.println(parts[0]);
+					System.out.println(parts[1]);
+					
 					char temprow = seatToBook.charAt(seatToBook.length() - 1);
 					temprow = Character.toUpperCase(temprow);
 					int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
