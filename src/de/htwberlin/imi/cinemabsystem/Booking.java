@@ -2,6 +2,7 @@ package de.htwberlin.imi.cinemabsystem;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Booking implements Serializable {
 
@@ -71,5 +72,23 @@ public class Booking implements Serializable {
 		}
 	
 		return totalPrice;
+	}
+	
+	public int getAmountoftickets() {
+		return this.tickets.size();
+	}
+	
+	// returns 0 if there is no ticket yet
+	public int getHighesticketno() {
+		int number = 0; 
+		try {
+			for (Iterator<Ticket> iterator = tickets.iterator(); iterator.hasNext();) {
+				Ticket ticket = (Ticket) iterator.next();
+				if (ticket.getTicketNum() > number ) number = ticket.getTicketNum();
+			}
+		} catch (NullPointerException e) {
+			number = 0;
+			
+		} return number;
 	}
 }

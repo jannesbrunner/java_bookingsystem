@@ -36,26 +36,22 @@ public class Storage {
 		helpstorage = new ArrayList<HelpItem>(); // Setting up the storage for
 													// help information
 
-		
-
 	}
-	
+
 	// Reset the whole system.
 	// ALL DATA WILL BE LOST!
 	public void resetData() {
 		movies.clear();
 		createMovies();
 		theaters.clear();
-		 createTheaters();
-		 shows.clear();
-		 createShows();
-		 helpstorage.clear();
-		 createHelpitems();
-		 customers.clear();
-		 testCustomer();
+		createTheaters();
+		shows.clear();
+		createShows();
+		helpstorage.clear();
+		createHelpitems();
+		customers.clear();
+		testCustomer();
 	}
-
-	
 
 	public void printHelpinformation() {
 
@@ -162,7 +158,7 @@ public class Storage {
 			String tempUn = tempCustomer.getUserName();
 			String userpin = tempCustomer.getPin();
 			if (tempUn.equals(username) && userpin.equals(pin)) {
-				
+
 				foundCustomer = tempCustomer;
 			}
 
@@ -211,19 +207,25 @@ public class Storage {
 	public Customer bookSeats(int choice, Customer customer) {
 		Ticket bookedticket = null; // Holds later the booked ticket
 		Booking userbooking = null; 
+		boolean wantstoquit = false;
+		
 		
 		if (choice < shows.size()) {
 
 			Show chosenOne = shows.get(choice);
 			System.out.println("These are the available seats for " + chosenOne.getMovie().getTitle() + "\n");
 			chosenOne.showSeating();
+			while (!wantstoquit) {
 			Scanner input = new Scanner(System.in);
 			System.out.println();
 			System.out.println("How many seats would you like to book? ");
+			if (input.next().equals("q")) { wantstoquit = true; return customer;}
 			int seats = input.nextInt();
+			
 
 			if (seats == 1) {
-
+				
+				
 				Scanner inputSeat = new Scanner(System.in);
 				System.out.println(
 						"Which seat would you like to book?\nPlease state a seat and row number like shown above.");
@@ -234,8 +236,11 @@ public class Storage {
 				chosenOne.bookSeat(temprow,	tempseat);
 				System.out.println("You booked seat " + tempseat + temprow + ".");
 				//Creating ticket
-				bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-				userbooking = customer.getBooking();
+				
+				
+				userbooking = customer.getBooking(); // get users booking storage
+				int ticketno = userbooking.getHighesticketno();
+				bookedticket = new Ticket(ticketno, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
 				userbooking.addTicket(bookedticket);
 				customer.setBooking(userbooking);
 				return customer;
@@ -289,12 +294,15 @@ public class Storage {
 				
 			}
 
-		} else {
+		 else {
 			System.out.println("Not a valid choice.");
 		}
+			}
+		}
+	
 		return customer;
 	}
-	
+
 	// Checks if seats in row or not
 	public int inLine(int seatQuantity) {
 		int inLine;
@@ -302,14 +310,14 @@ public class Storage {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Would you like to choose " + seatQuantity + " seats in a row (1) or separated (2)? ");
 		inLine = input.nextInt();
-		if (inLine != 1 && inLine != 2){
+		if (inLine != 1 && inLine != 2) {
 			System.out.println("Invalid number.");
 			return 0;
 		}
 
 		return inLine;
 	}
-	
+
 	// HIER ELI HIER
 	public void bookSeat() {
 
@@ -320,13 +328,12 @@ public class Storage {
 	//
 	// }
 
-	
 	/*
 	 * HERE BEGINS THE DEMO SETUP! Not necessary if you load from files.
 	 */
 	// default customers to load the customers arraylist
 	public void testCustomer() {
-		
+
 		customers.add(new Customer("Jay", "Bee", "Jay", "1234"));
 		customers.add(new Customer("Eli", "Gould", "Eli", "0815"));
 		customers.add(new Customer("mayo", "Schuetz", "Mario", "1337"));
@@ -360,6 +367,7 @@ public class Storage {
 		shows.add(new Show(movies.get(3), theaters.get(3), 16));
 
 	}
+
 	// create Help Items
 	private void createHelpitems() {
 		helpstorage.add(new HelpItem("quit", "To exit the program"));
@@ -369,7 +377,7 @@ public class Storage {
 		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
 		helpstorage.add(new HelpItem("book", "Book a Show"));
 		helpstorage.add(new HelpItem("reset", "Factory Reset the whole System"));
- 		helpstorage.add(new HelpItem("history", "Shows all bookings from customer"));
+		helpstorage.add(new HelpItem("history", "Shows all bookings from customer"));
 
 	}
 
