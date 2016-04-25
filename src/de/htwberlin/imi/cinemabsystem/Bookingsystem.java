@@ -41,6 +41,9 @@ public class Bookingsystem implements Serializable {
 	public Bookingsystem() {
 		this.bsh = new IO_system(); // Setting up the IO_system
 		storage = new Storage();
+		
+		boolean datacorrect = bsh.checkForBins();
+		if (!datacorrect) {System.out.println("Reset System"); reset(); }
 
 		loadData(); // load Data from files into Storage
 

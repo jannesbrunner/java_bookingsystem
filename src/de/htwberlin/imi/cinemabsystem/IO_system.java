@@ -5,6 +5,7 @@ package de.htwberlin.imi.cinemabsystem;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 
 
@@ -48,6 +49,33 @@ public class IO_system {
 		String input = br.readLine();
 		return input;
 
+	}
+	
+	public boolean checkForBins() {
+		boolean bins;
+		ArrayList<String> expectedBins = new ArrayList<String>();
+		File f = new File(".");
+		File[] fileArray = f.listFiles();
+		System.out.println("Working dir is: "+f.getAbsolutePath());
+		for (int i = 0; i < fileArray.length; i++) {
+			String file = fileArray[i].toString();
+			expectedBins.add(file);
+		}
+		Collections.sort(expectedBins);
+		//  System.out.println(expectedBins.toString());
+		System.out.println("Looking for nescessary files...");
+		
+		if(expectedBins.contains(".\\customers.bin") && expectedBins.contains(".\\help.bin") && expectedBins.contains(".\\movies.bin") && expectedBins.contains(".\\shows.bin") && expectedBins.contains(".\\theaters.bin")) 
+		{ 
+			bins = true;
+			System.out.println("OK");
+			return true;
+			
+		} else {
+			bins = false;
+			System.out.println("error");
+			return bins;
+		}
 	}
 	
 	// SAVE AND READ OBJECT FILES
