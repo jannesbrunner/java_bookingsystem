@@ -292,6 +292,13 @@ public class Storage {
 	public Customer deleteTicket (Customer currentCustomer, int TicketId) {
 		Booking customerBooking = currentCustomer.getBooking();
 		try {
+			char row2delete = customerBooking.tickets.get(TicketId).getSeat().getRow();
+			int seat2delete = customerBooking.tickets.get(TicketId).getSeat().getSeatNum();
+			Ticket x = customerBooking.tickets.get(TicketId);
+			Movie target = x.getMovie();
+			Theater target2 = x.getTheater();
+			double time = // HIER GET ES WEITER
+					// TODO 
 			customerBooking.tickets.remove(TicketId);
 			currentCustomer.setBooking(customerBooking);
 			System.out.println("Ticket sucessfully deleted.");
