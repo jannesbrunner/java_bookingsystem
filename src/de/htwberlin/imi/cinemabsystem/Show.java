@@ -121,6 +121,7 @@ public class Show implements Serializable {
 				if (currentSeat.getSeatNum() == seat && currentSeat.getRow() == row) {
 					if (currentSeat.isBooked()) {
 						System.out.println("This seat is already taken. Please select another seat.");
+						return 0;
 					} else {
 						currentSeat.book();
 					}
