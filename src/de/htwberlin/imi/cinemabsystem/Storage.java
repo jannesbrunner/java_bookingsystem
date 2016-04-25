@@ -221,7 +221,10 @@ public class Storage {
 				chosenOne.bookSeat(temprow, tempseat);
 				System.out.println("You booked seat " + tempseat + temprow + ".");
 				// Creating ticket
-				bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(),
+				
+				userbooking = customer.getBooking();
+		        int ticketnumer = userbooking.getHighesticketno() + 1;
+				bookedticket = new Ticket(ticketnumer, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(),
 						chosenOne.getSeat(temprow, tempseat));
 				userbooking = customer.getBooking();
 				userbooking.addTicket(bookedticket);

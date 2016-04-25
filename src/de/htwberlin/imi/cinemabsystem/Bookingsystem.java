@@ -232,7 +232,7 @@ public class Bookingsystem implements Serializable {
 					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
 
 
-					System.out.println("Ticket #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
+					System.out.println("Booking #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
 
 				}
 				System.out.println();

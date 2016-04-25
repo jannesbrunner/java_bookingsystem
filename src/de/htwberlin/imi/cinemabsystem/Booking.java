@@ -54,13 +54,13 @@ public class Booking implements Serializable {
 		
 		for (Ticket ticket : tickets){
 		
-		System.out.println("Ticket #  " + ticket.getTicketNum() + " for the movie " + ticket.getMovie().getTitle());	
+		System.out.println("Booking #  " + ticket.getTicketNum() + " for the movie " + ticket.getMovie().getTitle());	
 		System.out.println("#################################################");
 		System.out.println("###               JEM-Cinema                  ###");
 		System.out.println(" ##                                           ## ");
 		System.out.println("###  Theater  Seat                 Price      ###");
 		System.out.println(" ##                                           ##");
-		System.out.println("###  " +ticket.getTheater().getTheaterNum() + "        " + ticket.getSeat().getSeatNum() + ticket.getSeat().getRow() + "                   " + ticket.getMovie().getPrice() +             " $   ### ");
+		System.out.println("###  " +ticket.getTheater().getTheaterNum() + "        " + ticket.getSeat().getSeatNum() + ticket.getSeat().getRow() + "                   " + ticket.getMovie().getPrice() +             " $     ### ");
 		System.out.println("#################################################\n");
 		System.out.println();
 		}
