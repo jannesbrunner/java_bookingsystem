@@ -217,6 +217,7 @@ public class Storage {
 						"Which seat would you like to book?\nPlease state a seat and row number like shown above.");
 				String seatToBook = inputSeat.next();
 				char temprow = seatToBook.charAt(seatToBook.length() - 1);
+				temprow = Character.toUpperCase(temprow);
 				int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
 				chosenOne.bookSeat(temprow,	tempseat);
 				System.out.println("You booked seat " + tempseat + temprow + ".");
@@ -230,14 +231,38 @@ public class Storage {
 
 			} else if (seats >= 2) {
 
-				inLine(seats);
-				return customer;
-
+				if (inLine(seats) == 1){
+					
+					for (int i = 0; i < seats;i++){
+						System.out.println("Which seat would you like to book?\nPlease state a seat and row number like shown above.\nThere are " + seats + " seats left.");
+						Scanner inputSeat = new Scanner(System.in);
+						String seatToBook = inputSeat.next();
+						char temprow = seatToBook.charAt(seatToBook.length() - 1);
+						temprow = Character.toUpperCase(temprow);
+						int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
+						chosenOne.bookSeat(temprow,	tempseat);
+						System.out.println("You booked seat " + tempseat + temprow + ".");
+						
+					}
+					
+					return customer;
+				}
+				else if (inLine(seats) == 2){
+					
+					System.out.println("From which seat to which seat do you want to reserve?\nPlease state your selection as follows: 00X-01Y");
+					Scanner inputSeat = new Scanner(System.in);
+					String seatToBook = inputSeat.next();
+					char temprow = seatToBook.charAt(seatToBook.length() - 1);
+					temprow = Character.toUpperCase(temprow);
+					int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
+					chosenOne.bookSeat(temprow,	tempseat);
+					System.out.println("You booked seat " + tempseat + temprow + ".");
+				}
+				
 			}
 
 		} else {
 			System.out.println("Not a valid choice.");
-			return customer;
 		}
 		return customer;
 	}
@@ -249,6 +274,10 @@ public class Storage {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Would you like to choose " + seatQuantity + " seats in a row (1) or separated (2)? ");
 		inLine = input.nextInt();
+		if (inLine != 1 && inLine != 2){
+			System.out.println("Invalid number.");
+			return 0;
+		}
 
 		return inLine;
 	}
