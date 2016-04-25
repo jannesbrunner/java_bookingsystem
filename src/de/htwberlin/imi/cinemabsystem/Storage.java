@@ -289,6 +289,22 @@ public class Storage {
 		  return customer;
 		 }
 
+	public Customer deleteTicket (Customer currentCustomer, int TicketId) {
+		Booking customerBooking = currentCustomer.getBooking();
+		try {
+			customerBooking.tickets.remove(TicketId);
+			currentCustomer.setBooking(customerBooking);
+			System.out.println("Ticket sucessfully deleted.");
+			return currentCustomer;
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Unable to find this Ticket in your History. Aborted.");
+			
+			return currentCustomer;
+		}
+		
+		
+	}
 	// Checks if seats in row or not
 	public int inLine(int seatQuantity) {
 		int inLine;
