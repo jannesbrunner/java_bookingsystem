@@ -24,8 +24,7 @@ public class Bookingsystem implements Serializable {
 	 *            Not in use yet
 	 */
 
-	IO_system bsh; // the IO_System (for user input and file reading/writing)
-	
+	IO_system bsh; // the IO_System (for user input and file reading/writing)	
 	Storage storage;
 	String loggedUser = "";
 	Customer currentCustomer;
@@ -35,13 +34,10 @@ public class Bookingsystem implements Serializable {
 		// creating new System and get it run
 		final Bookingsystem system = new Bookingsystem();
 		system.run();
-	
-
 	}
 
 	public Bookingsystem() {
-		this.bsh = new IO_system(); // Setting up the IO_system
-						
+		this.bsh = new IO_system(); // Setting up the IO_system						
 		storage = new Storage();
 		loadData(); // load Data from files into Storage
 		printWelcome();
@@ -58,8 +54,7 @@ public class Bookingsystem implements Serializable {
 			switch (command) {// evaluating the commands
 			case "help":
 
-				storage.printHelpinformation();
-				
+				storage.printHelpinformation();				
 				break;
 
 			case "quit":
@@ -92,6 +87,11 @@ public class Bookingsystem implements Serializable {
 				//book a show
 				book();
 				break;
+				
+			case "history":
+				showHistory();
+				break;
+				
 
 			default: // if the command is unknown
 				System.out.println("This command is unknown.");
@@ -108,14 +108,12 @@ public class Bookingsystem implements Serializable {
 	 * will print the welcome screen
 	 */
 	private void printWelcome(){
+		
 		System.out.println("#############################");
 		System.out.println("### Welcome to JEM-Cinema ###");
 		System.out.println("#############################\n");
 		System.out.println("What would you like to do? \nType 'help' to see available commands.\n");
-		
-	}
-
-		
+	}		
 	
 	/**
 	 * register new customers. no username duplicates
@@ -153,8 +151,7 @@ public class Bookingsystem implements Serializable {
 	 * @param pin
 	 * @param found checks for already existing username
 	 */
-	private void login(){
-		
+	private void login(){		
 
 		if(loggedUser.equals("")){
 			   Scanner input = new Scanner(System.in);
@@ -177,7 +174,26 @@ public class Bookingsystem implements Serializable {
 		}
 	}
 	
-	
+	// shows all bookings from currentCustomer
+	private void showHistory(){
+		
+		if(loggedUser.equals("")){
+			System.out.println("Please login first!");
+		}
+		else{
+			System.out.println("You booked the following shows: ");
+			if(currentCustomer.getBooking().tickets.isEmpty()){
+				System.out.println("You don't have a booking history.");
+			}
+			else{
+				for(int i = 0; i < currentCustomer.getBooking().tickets.size(); i++){
+					String movie = currentCustomer.getBooking().tickets.get(i).getMovie().getTitle();
+					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
+					System.out.println("Titel " + movie + " Date/Time " + starttime);
+				}
+			}
+		}		
+	}
 	
 	private void book(){
 		if(loggedUser.equals("")) {
@@ -221,8 +237,7 @@ public class Bookingsystem implements Serializable {
 		raw = bsh.load("help.bin");
 		storage.setHelpfromfile(raw);
 		
-		System.out.println("( Loading Data successfull.");
-			
+		System.out.println("( Loading Data successfull.");			
 	}
 	
 	/*
@@ -235,8 +250,7 @@ public class Bookingsystem implements Serializable {
 		saveShows();
 		saveTheaters();
 		saveHelp();
-		System.out.println("All date saved sucessfully!");
-		
+		System.out.println("All date saved sucessfully!");		
 	}
 	
 	//
