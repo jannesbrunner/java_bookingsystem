@@ -350,7 +350,7 @@ public class Bookingsystem implements Serializable {
 		saveShows();
 		saveTheaters();
 		saveHelp();
-		System.out.println("All date saved sucessfully!");
+		System.out.println("All data saved sucessfully!");
 	}
 
 	//
