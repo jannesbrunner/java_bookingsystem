@@ -36,14 +36,23 @@ public class Storage {
 		helpstorage = new ArrayList<HelpItem>(); // Setting up the storage for
 													// help information
 
-		// ONLY FOR DEMO SET UP
-		// createMovies();
-		// createTheaters();
-		// createShows();
-		// createHelpitems();
-		// testCustomer();
-		// ---------------
+		
 
+	}
+	
+	// Reset the whole system.
+	// ALL DATA WILL BE LOST!
+	public void resetData() {
+		movies.clear();
+		createMovies();
+		theaters.clear();
+		 createTheaters();
+		 shows.clear();
+		 createShows();
+		 helpstorage.clear();
+		 createHelpitems();
+		 customers.clear();
+		 testCustomer();
 	}
 
 	
@@ -199,7 +208,9 @@ public class Storage {
 
 	// get Time of Choice
 	public Customer bookSeats(int choice, Customer customer) {
-
+		Ticket bookedticket = null; // Holds later the booked ticket
+		Booking userbooking = null; 
+		
 		if (choice < shows.size()) {
 
 			Show chosenOne = shows.get(choice);
@@ -221,10 +232,10 @@ public class Storage {
 				chosenOne.bookSeat(temprow,	tempseat);
 				System.out.println("You booked seat " + tempseat + temprow + ".");
 				//Creating ticket
-				Ticket bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-				Booking temp = customer.getBooking();
-				temp.addTicket(bookedticket);
-				customer.setBooking(temp);
+				bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
+				userbooking = customer.getBooking();
+				userbooking.addTicket(bookedticket);
+				customer.setBooking(userbooking);
 				return customer;
 				
 
@@ -269,6 +280,7 @@ public class Storage {
 	 */
 	// default customers to load the customers arraylist
 	public void testCustomer() {
+		
 		customers.add(new Customer("Jay", "Bee", "Jay", "1234"));
 		customers.add(new Customer("Eli", "Gould", "Eli", "0815"));
 		customers.add(new Customer("mayo", "Schuetz", "Mario", "1337"));

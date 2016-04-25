@@ -1,7 +1,13 @@
 package de.htwberlin.imi.cinemabsystem;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Theater theater;
 	private Movie movie;
 	private Seat seat;
