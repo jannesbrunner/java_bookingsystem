@@ -79,9 +79,8 @@ public class Bookingsystem implements Serializable {
 
 			case "logout":
 				// user logout
-				this.loggedUser = "";
-				this.currentCustomer = null;
-				System.out.println("Good bye!");
+				logout();
+				break;
 
 			case "register":
 				// register new customer
@@ -150,7 +149,7 @@ public class Bookingsystem implements Serializable {
 	 *            password
 	 */
 	private void register() {
-		if (loggedUser.equals("")) {
+		if (currentCustomer == null) {
 			Scanner input = new Scanner(System.in);
 			String username;
 			String lname;
@@ -319,5 +318,12 @@ public class Bookingsystem implements Serializable {
 		ArrayList<HelpItem> saveh;
 		saveh = storage.getHelpstorage();
 		bsh.savehelp(saveh);
+	}
+	
+	public void logout(){
+		
+		this.loggedUser = "";
+		this.currentCustomer = null;
+		System.out.println("Good bye!");
 	}
 }
