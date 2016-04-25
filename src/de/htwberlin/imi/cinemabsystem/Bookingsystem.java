@@ -5,6 +5,7 @@ package de.htwberlin.imi.cinemabsystem;
 
 import java.util.Scanner;
 import java.util.ArrayList; // for casting @loading
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 
 /**
@@ -39,7 +40,11 @@ public class Bookingsystem implements Serializable {
 	public Bookingsystem() {
 		this.bsh = new IO_system(); // Setting up the IO_system						
 		storage = new Storage();
+		
 		loadData(); // load Data from files into Storage
+		
+		System.out.println("Starting System...");
+	
 		printWelcome();
 	}
 
@@ -236,7 +241,7 @@ public class Bookingsystem implements Serializable {
 	public void loadData() {
 		
 		Object raw = null;
-		
+		try {
 		raw = bsh.load("customers.bin");
 		storage.setCustomersfromfile(raw);
 		
@@ -253,6 +258,11 @@ public class Bookingsystem implements Serializable {
 		storage.setHelpfromfile(raw);
 		
 		System.out.println(" Loading Data was successful.");
+	} catch (FileNotFoundException e) {
+		System.out.println("Unable to find data \n Resetting Data...");
+		reset();
+	}
+		
 
 	}
 	

@@ -149,7 +149,7 @@ public class IO_system {
 	 * General Object from file loader.
 	 * Note: You have to cast your object later.
 	 */
-	public Object load(String file) {
+	public Object load(String file) throws FileNotFoundException {
 		// Remember: Your class must implement Serializable in order to get loaded successfully
 		
 
