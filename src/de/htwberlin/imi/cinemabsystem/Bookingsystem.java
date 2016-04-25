@@ -183,11 +183,12 @@ public class Bookingsystem implements Serializable {
 
 		if (loggedUser.equals("")) {
 			Scanner input = new Scanner(System.in);
-			String username;
+			String name;
 			String pin;
 
 			System.out.print("Username: ");
-			username = input.nextLine();
+			name = input.nextLine();
+			String username = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
 			System.out.print("PIN: ");
 			pin = input.nextLine();
 			if (storage.findCustomer(username, pin) != null) {
