@@ -220,6 +220,8 @@ public class Bookingsystem implements Serializable {
 					String seat =  seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
 					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
 					System.out.println("Ticket #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
+					System.out.println("===========================");
+					System.out.println("Total Price: "+currentCustomer.getBooking().getTotalPrice());
 				}
 			}
 		}
