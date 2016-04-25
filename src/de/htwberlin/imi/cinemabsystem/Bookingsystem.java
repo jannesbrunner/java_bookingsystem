@@ -41,6 +41,9 @@ public class Bookingsystem implements Serializable {
 	public Bookingsystem() {
 		this.bsh = new IO_system(); // Setting up the IO_system
 		storage = new Storage();
+		
+		boolean datacorrect = bsh.checkForBins();
+		if (!datacorrect) {System.out.println("Reset System"); reset(); }
 
 		loadData(); // load Data from files into Storage
 
@@ -109,7 +112,8 @@ public class Bookingsystem implements Serializable {
 
 			case "delete":
 				// to delete a booked ticket
-				// delete();
+				deleteTicket();
+				break;
 
 			default: // if the command is unknown
 				System.out.println("This command is unknown.");
@@ -139,6 +143,7 @@ public class Bookingsystem implements Serializable {
 		System.out.println("==Factory Reset===");
 		this.storage = new Storage();
 		storage.resetData();
+		saveAll();
 		System.out.println("Factory Reset was successfull.");
 	}
 
@@ -217,14 +222,18 @@ public class Bookingsystem implements Serializable {
 			if (currentCustomer.getBooking().tickets.isEmpty()) {
 				System.out.println("You don't have a booking history.");
 			} else {
-				System.out.println("Total amount of booked Tickets: "+currentCustomer.getBooking().getAmountoftickets()+ "\n");
+				System.out.println(
+						"Total amount of booked Tickets: " + currentCustomer.getBooking().getAmountoftickets() + "\n");
 				for (int i = 0; i < currentCustomer.getBooking().tickets.size(); i++) {
 					int ticketno = currentCustomer.getBooking().tickets.get(i).getTicketNum();
 					String movie = currentCustomer.getBooking().tickets.get(i).getMovie().getTitle();
 					Integer seatrow = new Integer(currentCustomer.getBooking().tickets.get(i).getSeat().getSeatNum());
-					String seat =  seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
+					String seat = seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
 					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
+
+
 					System.out.println("Ticket #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
+
 				}
 				System.out.println();
 				System.out.println("Total Price: "+currentCustomer.getBooking().getTotalPrice() + "0 $.");
@@ -248,11 +257,54 @@ public class Bookingsystem implements Serializable {
 
 				int movieNum = input.nextInt();
 				Show showToBook = storage.getSoC(movieNum-1);
-
 				this.currentCustomer = storage.bookSeats(currentCustomer, showToBook);
 				
 			} catch (InputMismatchException e) {
 				System.out.println("Invalid Choice");
+			}
+		}
+	}
+
+	/*
+	 * If the customer wants to cancel an order of Ticket(s)
+	 */
+	private void deleteTicket() {
+		if (currentCustomer == null) {
+			System.out.println("Please login first!");
+			login();
+		}
+		System.out.println("You booked the following shows: ");
+		if (currentCustomer.getBooking().tickets.isEmpty()) {
+			System.out.println("You don't have a booking history.");
+		} else {
+			System.out.println(
+					"Total amount of booked Tickets: " + currentCustomer.getBooking().getAmountoftickets() + "\n");
+			for (int i = 0; i < currentCustomer.getBooking().tickets.size(); i++) {
+				
+				System.out.println("Option #"+i+":");
+				int ticketno = currentCustomer.getBooking().tickets.get(i).getTicketNum();
+				String movie = currentCustomer.getBooking().tickets.get(i).getMovie().getTitle();
+				Integer seatrow = new Integer(currentCustomer.getBooking().tickets.get(i).getSeat().getSeatNum());
+				String seat = seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
+				Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
+				System.out.println(
+						"Ticket no.:" + ticketno + ": '" + movie + "' Seat: " + seat + " | screens at " + starttime);
+				
+				
+			}
+			System.out.println("===========================");
+			Scanner input = new Scanner(System.in);
+			System.out.println("Your Choice: ");
+			try {
+
+				int DticketNum = input.nextInt();
+				this.currentCustomer = storage.deleteTicket(this.currentCustomer, DticketNum);
+					
+				
+				
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid Choice");
+			
 			}
 		}
 	}
@@ -332,9 +384,9 @@ public class Bookingsystem implements Serializable {
 		saveh = storage.getHelpstorage();
 		bsh.savehelp(saveh);
 	}
-	
-	public void logout(){
-		
+
+	public void logout() {
+
 		this.loggedUser = "";
 		this.currentCustomer = null;
 		System.out.println("Good bye!");
