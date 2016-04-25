@@ -35,6 +35,10 @@ public class Customer implements Serializable{
 		return booking;
 	}
 	
+	public void setBooking(Booking booking) {
+		this.booking = booking;
+	}
+	
 	public void setUserName(){
 		
 	}
@@ -60,10 +64,5 @@ public class Customer implements Serializable{
 	
 	public void setPin(){
 		
-	}
-	public void setBooking(Booking booking) {
-		this.booking = booking;
-	}
-	
-	 
+	}	 
 }
