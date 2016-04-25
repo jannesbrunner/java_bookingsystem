@@ -1,9 +1,14 @@
 package de.htwberlin.imi.cinemabsystem;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Booking {
+public class Booking implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ArrayList<Ticket> tickets;
 	
 	public Booking() {

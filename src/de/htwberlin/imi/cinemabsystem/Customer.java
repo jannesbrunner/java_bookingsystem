@@ -22,9 +22,8 @@ public class Customer {
 		this.lname = lname;
 		this.fname = fname;
 		this.pin = pin;
-		
-		
 		booking = new Booking();
+		// System.out.println("Booking angelegt");
 	}
 	
 	public String getUserName(){

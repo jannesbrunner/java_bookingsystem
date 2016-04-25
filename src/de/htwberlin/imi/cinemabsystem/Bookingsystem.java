@@ -92,6 +92,11 @@ public class Bookingsystem implements Serializable {
 				//book a show
 				book();
 				break;
+			
+			case "reset":
+				// reset the ssystem
+				reset();
+				break;
 
 			default: // if the command is unknown
 				System.out.println("This command is unknown.");
@@ -114,8 +119,14 @@ public class Bookingsystem implements Serializable {
 		System.out.println("What would you like to do? \nType 'help' to see available commands.\n");
 		
 	}
-
-		
+	
+	// FACTORY RESET THE WHOLE SYSTEM DATA
+	private void reset() {
+		System.out.println("==Factory Reset===");
+		this.storage = new Storage();
+		storage.resetData();
+		System.out.println("Factory Reset was successfull.");
+	}
 	
 	/**
 	 * register new customers. no username duplicates
@@ -221,7 +232,7 @@ public class Bookingsystem implements Serializable {
 		raw = bsh.load("help.bin");
 		storage.setHelpfromfile(raw);
 		
-		System.out.println("( Loading Data successfull.");
+		System.out.println(" Loading Data was successfull.");
 			
 	}
 	
