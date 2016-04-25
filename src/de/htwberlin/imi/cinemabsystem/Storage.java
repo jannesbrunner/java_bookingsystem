@@ -351,6 +351,7 @@ public class Storage {
 		helpstorage.add(new HelpItem("login", "Login in to your account. Username and PIN needed."));
 		helpstorage.add(new HelpItem("register", "If you are new to our service you can register here."));
 		helpstorage.add(new HelpItem("book", "Book a Show"));
+		helpstorage.add(new HelpItem("reset", "Factory Reset the whole System"));
 	}
 
 }
