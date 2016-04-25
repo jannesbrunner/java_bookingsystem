@@ -180,114 +180,101 @@ public class Storage {
 	}
 
 	// get Show of Choice
-	public void getSoC(int choice) {
+	public Show getSoC(int choice) {
 
+		Show showRtn = null;
 		if (choice < shows.size()) {
-			String userchoice = shows.get(choice).getMovie().getTitle();
-			String times = "The selected movie screens at \n";
-			int cnt = 0;
 
-			for (Show show : shows) {
+			showRtn = shows.get(choice);
 
-				String show2compare = show.getMovie().getTitle();
-
-				if (userchoice.equals(show2compare)) {
-					cnt++;
-					times += "Option #" + cnt + ": " + show.getTime() + "0\n";
-				}
-			}
-			if (cnt != 0) {
-				System.out.println(times);
-			}
 		} else {
 			System.out.println("Not a valid choice.");
+			return showRtn;
 		}
+		return showRtn;
 	}
 
 	// get Time of Choice
-	public Customer bookSeats(int choice, Customer customer) {
-		  Ticket bookedticket = null; // Holds later the booked ticket
-		  Booking userbooking = null; 
-		  userbooking = customer.getBooking();
-		  
-		  if (choice < shows.size()) {
+	public Customer bookSeats(Customer customer, Show showToBook) {
+		Ticket bookedticket = null; // Holds later the booked ticket
+		Booking userbooking = null;
 
-		   Show chosenOne = shows.get(choice);
-		   System.out.println("These are the available seats for " + chosenOne.getMovie().getTitle() + "\n");
-		   chosenOne.showSeating();
-		   Scanner input = new Scanner(System.in);
-		   System.out.println();
-		   System.out.println("How many seats would you like to book? ");
-		   try {
-		    int seats = input.nextInt();
-		    
-		    if (seats == 1) {
+		Show chosenOne = showToBook;
+		System.out.println("These are the available seats for " + chosenOne.getMovie().getTitle() + "\n");
+		chosenOne.showSeating();
+		Scanner input = new Scanner(System.in);
+		System.out.println();
+		System.out.println("How many seats would you like to book? ");
 
-		     Scanner inputSeat = new Scanner(System.in);
-		     System.out.println(
-		       "Which seat would you like to book?\nPlease state a seat and row number like shown above.");
-		     String seatToBook = inputSeat.next();
-		     char temprow = seatToBook.charAt(seatToBook.length() - 1);
-		     temprow = Character.toUpperCase(temprow);
-		     int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
-		     chosenOne.bookSeat(temprow, tempseat);
-		     System.out.println("You booked seat " + tempseat + temprow + ".");
-		     //Creating ticket
-		     
-		     
-		    
-		     int ticketno = userbooking.getHighesticketno() +1;
-		     bookedticket = new Ticket(ticketno, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-		     userbooking.addTicket(bookedticket);
-		     customer.setBooking(userbooking);
-		     
-		     return customer;
-		     
+		try {
+			int seats = input.nextInt();
 
-		    } else if (seats >= 2) {
-		        
-		      for (int i = 0; i < seats;i++){
-		       System.out.println("Which seat would you like to book?\nPlease state a seat and row number like shown above.\nThere are " + (seats - i) + " seats left.");
-		       Scanner inputSeat = new Scanner(System.in);
-		       String seatToBook = inputSeat.next();
-		       char temprow = seatToBook.charAt(seatToBook.length() - 1);
-		       temprow = Character.toUpperCase(temprow);
-		       int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
-		       if (chosenOne.bookSeat(temprow, tempseat) == 0){
-		        i = i - 1;
-		       }
-		       
-		       else{
-		        
-		        System.out.println("You booked seat " + tempseat + temprow + ".");
-		        //Creating ticket
-		        int ticketno = userbooking.getHighesticketno() +1;
-		        bookedticket = new Ticket(ticketno, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
-		        
-		        userbooking.addTicket(bookedticket);
-		        customer.setBooking(userbooking);
-		       };
-		       
-		       
-		      }
-		      System.out.println("Thank you for your order! Enjoy your movie.");
-		      
-		      return customer;
-		    }
-		    
-		   } catch (InputMismatchException noInt) {
-		    
-		    System.out.println("Not a valid choice.");
-		    
-		   }
+			if (seats == 1) {
 
-		   
+				Scanner inputSeat = new Scanner(System.in);
+				System.out.println(
+						"Which seat would you like to book?\nPlease state a seat and row number like shown above.");
+				String seatToBook = inputSeat.next();
+				char temprow = seatToBook.charAt(seatToBook.length() - 1);
+				temprow = Character.toUpperCase(temprow);
+				int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
+				chosenOne.bookSeat(temprow, tempseat);
+				System.out.println("You booked seat " + tempseat + temprow + ".");
+				// Creating ticket
+				bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(), chosenOne.getTheater(),
+						chosenOne.getSeat(temprow, tempseat));
+				userbooking = customer.getBooking();
+				userbooking.addTicket(bookedticket);
+				customer.setBooking(userbooking);
+				return customer;
 
-		  } else {
-		   System.out.println("Not a valid choice.");
-		  }
-		  return customer;
-		 }
+			} else if (seats >= 2) {
+
+				for (int i = 0; i < seats; i++) {
+					System.out.println(
+							"Which seat would you like to book?\nPlease state a seat and row number like shown above.\nThere are "
+									+ (seats - i) + " seats left.");
+
+					try {
+
+						Scanner inputSeat = new Scanner(System.in);
+						String seatToBook = inputSeat.next();
+						char temprow = seatToBook.charAt(seatToBook.length() - 1);
+						temprow = Character.toUpperCase(temprow);
+						int tempseat = Integer.valueOf(seatToBook.substring(0, seatToBook.length() - 1));
+
+						if (chosenOne.bookSeat(temprow, tempseat) == 0) {
+							i = i - 1;
+						}
+
+						else {
+
+							System.out.println("You booked seat " + tempseat + temprow + ".");
+							// Creating ticket
+							bookedticket = new Ticket(001, chosenOne.getMovie(), chosenOne.getTime(),
+									chosenOne.getTheater(), chosenOne.getSeat(temprow, tempseat));
+							userbooking = customer.getBooking();
+							userbooking.addTicket(bookedticket);
+							customer.setBooking(userbooking);
+						}
+
+					} catch (java.lang.NumberFormatException things) {
+						System.out.println("Invalid choice");
+					}
+
+				}
+				System.out.println("Thank you for your order! Enjoy your movie.");
+
+				return customer;
+			}
+
+		} catch (InputMismatchException noInt) {
+
+			System.out.println("Not a valid choice.");
+
+		}
+		return customer;
+	}
 
 	// Checks if seats in row or not
 	public int inLine(int seatQuantity) {
@@ -350,7 +337,6 @@ public class Storage {
 		shows.add(new Show(movies.get(0), theaters.get(0), 12));
 		shows.add(new Show(movies.get(1), theaters.get(1), 12));
 		shows.add(new Show(movies.get(2), theaters.get(2), 14));
-		shows.add(new Show(movies.get(3), theaters.get(3), 12));
 		shows.add(new Show(movies.get(3), theaters.get(3), 16));
 
 	}

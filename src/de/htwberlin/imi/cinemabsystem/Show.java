@@ -132,11 +132,11 @@ public class Show implements Serializable {
 		return 1;
 	}
 
-	public void unbookSeat(char row, int seat) {
+	public int unbookSeat(char row, int seat) {
 
 		if (seat > seatsPerRow || seat > r) {
 			System.out.println("Invalid seat number. Please try again.");
-			return;
+			return 0;
 		}
 
 		for (int y = 0; y <= room.length - 1; y++) {
@@ -146,13 +146,15 @@ public class Show implements Serializable {
 				if (currentSeat.getSeatNum() == seat && currentSeat.getRow() == row) {
 					if (currentSeat.isBooked()) {
 						currentSeat.unbook();
+						return 1;
+						
 					} else {
 						System.out.println("This seat is unbooked.");
 					}
 				}
 
 			}
-		}
+		}return 0;
 	}
 	
 	public Seat getSeat(char row, int seatNum) {

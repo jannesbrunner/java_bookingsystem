@@ -113,7 +113,7 @@ public class Bookingsystem implements Serializable {
 
 			default: // if the command is unknown
 				System.out.println("This command is unknown.");
-				System.out.println("type help to learn more.");
+				System.out.println("Type help to learn more.");
 			}
 
 		}
@@ -235,7 +235,7 @@ public class Bookingsystem implements Serializable {
 
 	private void book() {
 		if (loggedUser.equals("")) {
-			System.out.println("Pls login first!");
+			System.out.println("Please login first!");
 			login();
 		} else {
 			storage.allMovies();
@@ -247,10 +247,10 @@ public class Bookingsystem implements Serializable {
 			try {
 
 				int movieNum = input.nextInt();
-				storage.getSoC(movieNum);
-				int choice = input.nextInt();
+				Show showToBook = storage.getSoC(movieNum-1);
 
-				this.currentCustomer = storage.bookSeats(choice, currentCustomer);
+				this.currentCustomer = storage.bookSeats(currentCustomer, showToBook);
+				
 			} catch (InputMismatchException e) {
 				System.out.println("Invalid Choice");
 			}
