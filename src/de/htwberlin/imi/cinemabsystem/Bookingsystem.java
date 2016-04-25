@@ -81,6 +81,12 @@ public class Bookingsystem implements Serializable {
 				// user logout
 				logout();
 				break;
+				
+			case "print":
+				// prints tickets
+				print();
+				break;
+
 
 			case "register":
 				// register new customer
@@ -219,9 +225,10 @@ public class Bookingsystem implements Serializable {
 					String seat =  seatrow.toString() + currentCustomer.getBooking().tickets.get(i).getSeat().getRow();
 					Double starttime = currentCustomer.getBooking().tickets.get(i).getStartTime();
 					System.out.println("Ticket #"+ticketno+": '"+ movie + "' Seat: "+seat+ " | screens at " + starttime);
-					System.out.println("===========================");
-					System.out.println("Total Price: "+currentCustomer.getBooking().getTotalPrice());
 				}
+				System.out.println();
+				System.out.println("Total Price: "+currentCustomer.getBooking().getTotalPrice() + "0 $.");
+				System.out.println("Type print to print out your tickets.");
 			}
 		}
 	}
@@ -331,5 +338,10 @@ public class Bookingsystem implements Serializable {
 		this.loggedUser = "";
 		this.currentCustomer = null;
 		System.out.println("Good bye!");
+	}
+	
+public void print(){
+		
+		currentCustomer.getBooking().printAllTickets();
 	}
 }
