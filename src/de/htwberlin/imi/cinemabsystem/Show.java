@@ -77,17 +77,6 @@ public class Show implements Serializable {
 			}
 		}
 
-		for (int y = 0; y <= room.length - 1; y++) {
-			for (int x = 0; x <= room[y].length - 1; x++) {
-				Seat currentSeat = room[y][x];
-
-				if (currentSeat.getSeatNum() == 10 && currentSeat.getRow() == 'K') {
-					currentSeat.book();
-				}
-
-			}
-		}
-
 	}
 
 	public void showSeating() {
